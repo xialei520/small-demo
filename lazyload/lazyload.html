@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>懒加载</title>
+    <style media="screen">
+      body,div,ul,li{margin: 0;padding: 0}
+      div{
+        width:80%;
+        height: auto;
+        /* border: 1px solid red; */
+        margin: 0 auto;
+      }
+      ul{
+        width: 100%;
+        height: 280px;
+        /* border: 1px solid blue; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      li{
+        list-style: none;
+        /* float: left; */
+        width: 230px;
+        height: 230px;
+        /* border: 1px solid green; */
+
+      }
+      img{
+        width: 100%;
+        height: 100%;
+        display: block;
+        box-shadow: 0px 5px 13px 0px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.6s;
+      }
+
+        div img:hover{
+          transform: scale(1.4);
+
+          z-index: 100;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div id="containter">
+      <!-- <ul>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+      </ul> -->
+    </div>
+    <script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+      var Odiv = document.getElementById("containter");
+      var Oul = document.getElementsByTagName("ul");
+      var oImg = document.getElementsByTagName('img');
+      var seeHeight = document.documentElement.clientHeight;
+      $.ajax({
+        type:"GET",
+        url:"pic.php",
+        async:true,
+        success:function(s){
+          var arr = JSON.parse(s);
+          // console.log(s);
+          var num = Math.ceil(arr.results.length / 4);
+          // console.log(num);
+          var html = "";
+          for(let i = 0; i < num; i++){
+            html += `<ul>
+              <li><img src="wait.gif" data-src="${arr.results[i*4].url}"/></li>
+              <li><img src="wait.gif" data-src="${arr.results[i*4+1].url}"/></li>
+              <li><img src="wait.gif" data-src="${arr.results[i*4+2].url}"/></li>
+              <li><img src="wait.gif" data-src="${arr.results[i*4+3].url}"/></li>
+            </ul>`
+          }
+          Odiv.innerHTML = html;
+          var Img = Array.from(oImg);
+          Img.forEach(function(value, index){
+            if(value.offsetTop < seeHeight){
+              console.log(value.offsetTop,seeHeight);
+              value.src = value.dataset.src;
+
+            }
+          })
+        }
+      })
+      $(window).scroll(function(){
+            var Img = Array.from(oImg);
+            console.log(Img.length);
+            Img.forEach(function(value, index,arr){
+              var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+              console.log(value.offsetTop,seeHeight + scrollTop)
+              if(value.offsetTop < seeHeight + scrollTop -100){
+                value.src = value.dataset.src;
+              }
+            })
+      })
+
+
+    </script>
+  </body>
+</html>
