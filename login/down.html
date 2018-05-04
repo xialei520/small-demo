@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Down</title>
+    <style>
+        html {
+            font-size: 62.5%
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            background: url(background.png) no-repeat;
+            background-size: cover;
+        }
+
+        ;
+        body,p,div,ul,li {
+            margin: 0;
+            padding: 0;
+
+        }
+        ul{
+            margin-top: 0;
+            padding:0;
+        }
+
+        .text {
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            margin: 55px auto;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .phone {
+            width: 80%;
+            height: auto;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .phone img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .down {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .down img {
+            width: 130px;
+            height: auto;
+        }
+
+        .pic {
+            width: 76%;
+            height: 83%;
+            border: 1px solid red;
+            z-index: 2;
+            position: absolute;
+            top: 1.7em;
+            left: 1.72em;
+            overflow: hidden;
+        }
+
+        .pic ul {
+            position: absolute;
+            left: 0;
+            height: 100%;
+        }
+
+        .pic ul li {
+            list-style: none;
+            float: left;
+            width: 185px;
+            height: 100%;
+            /* padding: 10px */
+        }
+
+        .pic ul li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* body,html{overflow-x:hidden;overflow-y:hidden;} */
+    </style>
+</head>
+
+<body>
+    <p class="text">IBC</p>
+    <div class="phone">
+        <img src="phone1.png" alt="">
+        <div class="pic" id="figure">
+            <ul>
+                <li>
+                    <img src="picture.png" alt="">
+                    <img src="picture.png" alt="">
+                    <img src="picture.png" alt="">
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="down">
+        <p>
+            <img src="iso.png" alt="">
+        </p>
+        <p>
+            <img src="anzhuo.png" alt="">
+        </p>
+    </div>
+
+    <script src="startMove.js"></script>
+    <script>
+        var oDiv = document.getElementById("figure");
+        var oUl = oDiv.getElementsByTagName("ul")[0];
+        var aLis = oUl.getElementsByTagName("li");
+
+        //直接拷贝一份添加在ul的尾巴上
+        oUl.innerHTML += oUl.innerHTML;
+        //将ul的宽度变成原来的两倍
+        oUl.style.width = aLis.length * aLis[0].offsetWidth + "px";
+
+        var timer = null;
+        // timer = setInterval(timerInner, 2000);
+
+        function timerInner() {
+            startMove(oUl, {
+                left: oUl.offsetLeft - aLis[0].offsetWidth
+            }, function () {
+                //动画结束以后，判断动画的点是不是oUl的一半
+                if (oUl.offsetLeft <= -oUl.offsetWidth / 2) {
+                    oUl.style.left = 0;
+                }
+            })
+        }
+    </script>
+     
+</body>
+
+</html>
