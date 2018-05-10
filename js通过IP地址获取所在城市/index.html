@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>根据IP地址获取所在城市</title>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <input id="Button1" type="button" value="根据IP地址获取所在城市" onclick="getIpPlace();" />
+        </div>
+    </form>
+    <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/ecmascript"></script>
+    <script type="text/javascript">
+        function getIpPlace() {
+            // alert(remote_ip_info["province"] + "省" + ',' + remote_ip_info["city"] + "市")
+            console.log(remote_ip_info)
+        }
+
+
+        // 所用接口：
+        // http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js
+        // 返回结果：
+        // var remote_ip_info = {
+        //     "ret": 1, "start": "1.192.0.0", "end": "1.193.127.255", "country": "\u4e2d\u56fd", "province": "\u6cb3\u5357", "city": "\u90d1\u5dde",
+        //     "district": "", "isp": "\u7535\u4fe1", "type": "", "desc": ""
+        // };
+        // country：国家
+        // province：省份
+        // city：城市
+        // isp：所用网络（例如电信）
+    </script>
+</body>
+
+</html>

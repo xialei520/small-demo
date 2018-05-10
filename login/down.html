@@ -1,154 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh">
 
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>跳转页面</title>
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Down</title>
-    <style>
-        html {
-            font-size: 62.5%
-        }
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link rel="stylesheet" type="text/css" href="css/devices.min.css">
+	<style type="text/css">
+		html {
+			font-size: 62.5%
+		}
 
-        html {
-            width: 100%;
-            height: 100%;
-            background: url(background.png) no-repeat;
-            background-size: cover;
-        }
+		.cd-iphone-6 {
+			/* padding: 30px; */
+		}
 
-        ;
-        body,p,div,ul,li {
-            margin: 0;
-            padding: 0;
+		.cd-body {
+			width: 200px;
+			height: 60px;
+			margin: 20% auto;
+		}
 
-        }
-        ul{
-            margin-top: 0;
-            padding:0;
-        }
+		body {
+			display: flex;
+			justify-content: center;
+			/* margin-top: 50px; */
+		}
 
-        .text {
-            width: 100%;
-            text-align: center;
-            font-size: 30px;
-            margin: 55px auto;
-        }
+		.cd-iphone-6>.cd-body {
+			width: 15em;
+			height: 29em;
+		}
 
-        body {
-            text-align: center;
-        }
+		[class^='cd-iphone-6'] .cd-screen {
+			width: 13.5em;
+			height: 22em;
+			background: black;
+			top: 3em;
+			left: 77%;
+			margin-left: -10.5em;
+			/* width: 21em; */
+			/* height: 37em; */
+			border: solid .2em black;
+			border-radius: .1em;
+		}
 
-        .phone {
-            width: 80%;
-            height: auto;
-            margin: 0 auto;
-            position: relative;
-        }
+		.down {
+			position: absolute;
+			bottom: 8%;
+			display: flex;
+			justify-content: space-between;
+			width: 64%;
+		}
 
-        .phone img {
-            width: 100%;
-            height: 100%;
-        }
+		.down p {
+			font-size: 14px;
+			border: 1px solid white;
+			padding: 8px 16px;
+			border-radius: 20px;
+		}
+	</style>
 
-        .down {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .down img {
-            width: 130px;
-            height: auto;
-        }
-
-        .pic {
-            width: 76%;
-            height: 83%;
-            border: 1px solid red;
-            z-index: 2;
-            position: absolute;
-            top: 1.7em;
-            left: 1.72em;
-            overflow: hidden;
-        }
-
-        .pic ul {
-            position: absolute;
-            left: 0;
-            height: 100%;
-        }
-
-        .pic ul li {
-            list-style: none;
-            float: left;
-            width: 185px;
-            height: 100%;
-            /* padding: 10px */
-        }
-
-        .pic ul li img {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* body,html{overflow-x:hidden;overflow-y:hidden;} */
-    </style>
 </head>
 
 <body>
-    <p class="text">IBC</p>
-    <div class="phone">
-        <img src="phone1.png" alt="">
-        <div class="pic" id="figure">
-            <ul>
-                <li>
-                    <img src="picture.png" alt="">
-                    <img src="picture.png" alt="">
-                    <img src="picture.png" alt="">
 
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="down">
-        <p>
-            <img src="iso.png" alt="">
-        </p>
-        <p>
-            <img src="anzhuo.png" alt="">
-        </p>
-    </div>
 
-    <script src="startMove.js"></script>
-    <script>
-        var oDiv = document.getElementById("figure");
-        var oUl = oDiv.getElementsByTagName("ul")[0];
-        var aLis = oUl.getElementsByTagName("li");
+	<div class="cd-iphone-6 cd-rosegold  " style="margin:0">
+		<div class="cd-body">
 
-        //直接拷贝一份添加在ul的尾巴上
-        oUl.innerHTML += oUl.innerHTML;
-        //将ul的宽度变成原来的两倍
-        oUl.style.width = aLis.length * aLis[0].offsetWidth + "px";
+			<div class="cd-screen cd-transition-slider cd-smart-loader" data-pause-speed="4000" data-transition-speed="500">
+				<img src="img/GoodReader-4.5-for-iOS-iPhone-screenshot-004.jpg">
+				<img src="img/carousel.png">
+				<img src="img/ios-8-screenshot-iphone-6-full.jpg">
+			</div>
+		</div>
+	</div>
+	<div class="down">
+		<p id="ios">IOS下载</p>
+		<!-- <p></p> -->
+		<p id="android">安卓下载</p>
+	</div>
 
-        var timer = null;
-        // timer = setInterval(timerInner, 2000);
+	<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/devices.js"></script>
 
-        function timerInner() {
-            startMove(oUl, {
-                left: oUl.offsetLeft - aLis[0].offsetWidth
-            }, function () {
-                //动画结束以后，判断动画的点是不是oUl的一半
-                if (oUl.offsetLeft <= -oUl.offsetWidth / 2) {
-                    oUl.style.left = 0;
-                }
-            })
-        }
-    </script>
-     
+	<script>
+		function isWeiXin() {
+			var ua = window.navigator.userAgent.toLowerCase();
+			if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+				return true;
+			} else {
+				return false;
+			}
+		} 
+		
+		$("#ios").click(function(){
+			if(isWeiXin()){
+				alert("请从浏览器中打开")
+			}else{
+				alert("开始下载")
+			}
+		})
+		$("#Android").click(function(){
+			if(isWeiXin()){
+				alert("请从浏览器中打开")
+			}else{
+				alert("开始下载")
+			}
+		})
+	</script>
 </body>
 
 </html>
