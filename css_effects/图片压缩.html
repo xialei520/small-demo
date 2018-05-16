@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id='fileImg' src="pic.jpg" alt="">
+    <canvas id="canvas"></canvas>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        var fup = $("#fileImg");
+
+                var img = fup.files;
+
+                var image = new Image();
+                var canvas = $("#canvas")[0];//document.createElement("canvas");
+                var ctx = canvas.getContext('2d');
+
+                image.onload = function () {
+                      var w = image.naturalWidth,
+                            h = image.naturalHeight;
+
+                      var toSize = 400;
+                      canvas.width = toSize;
+                      canvas.height = toSize;
+
+                      var w2 = toSize, h2 = toSize;
+                      if (w > h) {
+                            h2 = h / w * toSize;
+                      } else {
+                            w2 = w / h * toSize;
+                      }
+
+                      ctx.drawImage(image, 0, 0, w, h, 0, 0, w2, h2);
+
+                }
+
+                // 判断是否图片
+        //         if (!img) {
+        //               return;
+        //         }
+
+                // 判断图片格式
+        //         if (!(img.type.indexOf('image') == 0 && img.type && /\.(?:jpg|png|gif)$/.test(img.name))) {
+        //               alert('图片只能是jpg,gif,png');
+        //               return;
+        //         }
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) { // reader onload start
+                      var url = reader.result;
+                      image.src = url;
+                    console.log(url)
+
+                } // reader onload end
+
+        //         reader.readAsDataURL(img);
+      
+    </script>
+</body>
+
+</html>

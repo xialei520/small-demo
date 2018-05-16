@@ -15,10 +15,12 @@
         </div>
     </form>
     <script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/ecmascript"></script>
+    
     <script type="text/javascript">
         function getIpPlace() {
             // alert(remote_ip_info["province"] + "省" + ',' + remote_ip_info["city"] + "市")
             console.log(remote_ip_info)
+            alert("你来自"+remote_ip_info["city"]+"市")
         }
 
 
