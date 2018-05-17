@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>socket.io</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="news" />
+        <span @click="send()">发送</span>
+        <ul>
+            <li v-for="a in arr"></li>
+        </ul>
+    </div>
+    <!-- <script src="https://cdn.socket.io/socket.io-1.4.4.js"></script> -->
+    <script src="socket.io.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <script>
+             var socket = io('http://localhost');
+                    socket.on('news', function (data) {
+                        console.log(data);
+                        socket.emit('my other event', { my: 'data' });
+            });
+        // new Vue({
+        //     el: "#app",
+        //     data: {
+        //         news: '',
+        //         arr: []
+        //     },
+
+        //     mounted: function () {
+
+        //     },
+        //     methods: {
+        //         send() {
+                   
+
+
+
+        //         }
+        //     }
+        // })
+    </script>
+</body>
+
+</html>

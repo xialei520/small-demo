@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div id="demo">
+      <input type="text" v-model="text">
+      <button type="button" @click="send">发送</button>
+      <ul>
+        <li v-for="a in arr"> {{a}}</li>
+      </ul>
+    </div>
+    <script type="text/javascript" src="js/socket.js">  </script>
+    <script type="text/javascript" src="js/vue.js">
+
+    </script>
+    <script type="text/javascript">
+      var socket = io('http://localhost:6789');
+    //   socket.on('move', function (data) {
+    //   console.log(data);
+    //
+    //   // socket.emit('my other event', { my: 'data' });
+    // });
+    new Vue({
+      el:"#demo",
+      data:{
+        text:"",
+        arr:[]
+      },
+      methods:{
+        send:function(){
+          var self = this;
+          socket.emit("chat", self.text)
+        }
+      },
+      mounted:function(){
+        var self = this;
+        socket.on("getText", function(data){
+          console.log(data);
+          self.arr.push(data.text);
+        })
+      }
+    })
+    socket.emit()
+    </script>
+  </body>
+</html>
