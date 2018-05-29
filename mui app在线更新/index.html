@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #version {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .check {
+            margin-top: 58%;
+        }
+
+        .check li {
+            padding: 16px 11px;
+        }
+
+        .check a {
+            font-size: 20px;
+        }
+
+        .check p {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        progress {
+            border-radius: 2px;
+            border-left: 1px #ccc solid;
+            border-right: 1px #ccc solid;
+            border-top: 1px #aaa solid;
+            background-color: #eee;
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: #d7d7d7;
+        }
+
+        progress::-webkit-progress-value {
+            background-color: #aadd6a;
+        }
+
+        .updateProDiv {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mui-content">
+        <div class="mui-scroll">
+            <div class="login-img">
+                <img src="images/icon.png" width="20%" />
+                <p id="version">当前应用版本:</p>
+            </div>
+        </div>
+
+        <ul class="mui-table-view check" id="check">
+            <li class="mui-table-view-cell">
+                <div class="updateProDiv">更新进度:
+                    <progress value="" max="" id="proDownFile"></progress>
+                    <span class="persent"></span>
+                </div>
+                <a href="#" id="update" class="mui-navigate-right">检查更新</a>
+            </li>
+        </ul>
+
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        var wgtVer = null;
+        function plusReady() { // 获取本地应用资源版本号
+            plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+                wgtVer = inf.version;
+                version.innerHTML = '当前应用版本：' + wgtVer;
+            });
+        }
+        if (window.plus) {
+            plusReady();
+        } else {
+            document.addEventListener('plusready', plusReady, false);
+        }
+
+        var ver;
+        //休眠方法
+        function sleep(numberMillis) {
+            var now = new Date();
+            var exitTime = now.getTime() + numberMillis;
+            while (true) {
+                now = new Date();
+                if (now.getTime() > exitTime)
+                    return;
+            }
+        }
+        mui('.mui-table-view-cell').on('click', '#update', function () {
+            plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+                ver = inf.version;
+                console.log("当前应用版本：" + ver);
+                var url = app.baseurl + 'index.php/api/other/version';
+                var client;
+                if (mui.os.ios) { client = 'ios'; }
+                else { client = 'android'; }
+                mui.ajax(url, {
+                    data: {
+                        version: ver,
+                        client: client
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    timeout: 10000,
+                    success: function (data) {
+                        if (data.status == 1) {
+                            var btnArray = ['是', '否'];
+                            mui.confirm('最新version是：' + data.version + ',是否更新', '发现最新版本', btnArray, function (z) {
+                                if (z.index == 0) {
+                                    console.log('确定');
+                                    $('.updateProDiv').css('display', 'block');
+                                    $('#update').css('display', 'none');
+                                    var dtask = plus.downloader.createDownload(data.url, {}, function (d, status) {
+                                        if (status == 200) {
+                                            clearInterval(i);
+                                            $('.persent').html("100%");
+                                            plus.nativeUI.toast("正在准备环境，请稍后！");
+                                            sleep(1000);
+                                            var path = d.filename;//_downloads yijietong.apk
+                                            console.log(d.filename);
+                                            $('#update').css('display', 'block');
+                                            $('.updateProDiv').css('display', 'none');
+                                            plus.runtime.install(path); // 安装下载的apk文件
+                                        } else {
+                                            alert('Download failed:' + status);
+                                        }
+                                    });
+                                    dtask.start();
+                                    var i = setInterval(function () {
+                                        var totalSize = dtask.totalSize;
+                                        var downloadedSize = dtask.downloadedSize;
+                                        $('#proDownFile').attr('value', downloadedSize);
+                                        $('#proDownFile').attr('max', totalSize);
+                                        console.log(dtask.downloadedSize);
+                                        console.log(dtask.totalSize);
+                                    }, 100); //1000为1秒钟
+                                } else {
+                                    console.log('不确定');
+                                    return;
+                                }
+                            });
+                        }
+                        else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (xhr, type, errerThrown) {
+                        mui.toast('网络异常,请稍候再试');
+                    }
+                });
+
+            });
+        });
+    </script>
+</body>
+
+</html>
