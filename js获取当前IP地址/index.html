@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="depcity"></div>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+     
+    <script type="text/javascript">  
+
+        //闭包
+        // var foo = function(json) {
+        //    console.log(json.ip); // alerts the ip address
+        //    var n = json.ip;
+        //    console.log(n);
+        //    return (function(){
+        //        console.log(n);
+        //        return n;
+        //    })()
+        // }
+        // console.log(foo());
+        
+        //本地缓存
+        function foo(json){
+            localStorage.setItem('ip', json.ip);
+        }
+        console.log(localStorage.getItem('ip'));
+    </script>
+     <script type="text/javascript" src="http://freegeoip.net/json/?callback=foo"></script>
+    
+   
+</body>
+
+</html>
