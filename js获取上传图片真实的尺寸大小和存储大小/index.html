@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="file" type="file" multiple>
+    <input id="Button1" type="button" value="button" onclick="check()">
+    <script>
+        window.check = function () {
+            var input = document.getElementById("file");
+            console.log(input.files)
+            if (input.files) {
+                //读取图片数据  
+                var f = input.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var data = e.target.result;//base64格式
+                    console.log(e)
+                    //加载图片获取图片真实宽度和高度  
+                    var image = new Image();
+                    image.onload = function () {
+                        var width = image.width;
+                        var height = image.height;
+                        alert(width + '======' + height + "=====" + f.size);
+                    };
+                    image.src = data;
+                    document.body.appendChild(image)
+                };
+                reader.readAsDataURL(f);
+            } else {
+                var image = new Image();
+                image.onload = function () {
+                    var width = image.width;
+                    var height = image.height;
+                    var fileSize = image.fileSize;
+                    alert(width + '======' + height + "=====" + fileSize);
+                }
+                image.src = input.value;
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

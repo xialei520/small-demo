@@ -10,12 +10,13 @@
 
 <body>
     <div>
-        <img src="" alt="">
+        
         <form action="">
-            
+
         </form>
     </div>
     <script>
+        
         var img = "500932723.jpg";//imgurl 就是你的图片路径  
         //图片转为base64
         function getBase64Image(img) {
@@ -49,7 +50,7 @@
                 console.log(document.forms[0])
                 fd.append("the_file", blob, 'image.png');
                 console.log(fd);
-                img1.src = data;
+                img1.src = '';
                 document.body.appendChild(img1);
                 //上面的the_file为这个文件的key，等效于input中的name，image.png则是文件名，由于base64的图片信息是不带文件名的，所以可以手动指定一个，这个参数是可选的
 
@@ -83,6 +84,7 @@
         //         console.log(data);
         //     }
         // });
+         
     </script>
 </body>
 
