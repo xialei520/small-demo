@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <img src="" alt="">
+    </div>
+    <script>
+        var img = "500932723.jpg";//imgurl 就是你的图片路径  
+        // //将图片转为base64格式
+        // function getBase64Image(img) {
+        //     var canvas = document.createElement("canvas");
+        //     canvas.width = img.width;
+        //     canvas.height = img.height;
+        //     var ctx = canvas.getContext("2d");
+        //     ctx.drawImage(img, 0, 0, img.width, img.height);
+        //     var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+        //     var dataURL = canvas.toDataURL("image/" + ext);
+        //     return dataURL;
+        // }
+
+        // var image = new Image();
+        // image.src = img;
+        // image.onload = function () {
+        //     var base64 = getBase64Image(image);
+        //     console.log(base64);
+        // }
+
+        function convertImgToBase64(url, callback, outputFormat) {
+            var canvas = document.createElement('CANVAS'),
+                ctx = canvas.getContext('2d'),
+                img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                canvas.height = img.height;
+                canvas.width = img.width;
+                ctx.drawImage(img, 0, 0);
+                var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+                callback.call(this, dataURL);
+                canvas = null;
+            };
+            img.src = url;
+        }
+        convertImgToBase64(img)
+    </script>
+</body>
+
+</html>
