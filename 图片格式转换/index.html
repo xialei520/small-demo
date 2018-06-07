@@ -11,44 +11,78 @@
 <body>
     <div>
         <img src="" alt="">
+        <form action="">
+            
+        </form>
     </div>
     <script>
         var img = "500932723.jpg";//imgurl 就是你的图片路径  
-        // //将图片转为base64格式
-        // function getBase64Image(img) {
-        //     var canvas = document.createElement("canvas");
-        //     canvas.width = img.width;
-        //     canvas.height = img.height;
-        //     var ctx = canvas.getContext("2d");
-        //     ctx.drawImage(img, 0, 0, img.width, img.height);
-        //     var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
-        //     var dataURL = canvas.toDataURL("image/" + ext);
-        //     return dataURL;
-        // }
-
-        // var image = new Image();
-        // image.src = img;
-        // image.onload = function () {
-        //     var base64 = getBase64Image(image);
-        //     console.log(base64);
-        // }
-
-        function convertImgToBase64(url, callback, outputFormat) {
-            var canvas = document.createElement('CANVAS'),
-                ctx = canvas.getContext('2d'),
-                img = new Image();
-            img.crossOrigin = 'Anonymous';
-            img.onload = function () {
-                canvas.height = img.height;
-                canvas.width = img.width;
-                ctx.drawImage(img, 0, 0);
-                var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-                callback.call(this, dataURL);
-                canvas = null;
-            };
-            img.src = url;
+        //图片转为base64
+        function getBase64Image(img) {
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+            var dataURL = canvas.toDataURL("image/png");
+            return dataURL
+            // return dataURL.replace("data:image/png;base64,", "");
         }
-        convertImgToBase64(img)
+
+
+        function main() {
+            var img = document.createElement('img');
+            // img.crossOrigin="anonymous";
+            img.src = '500932723.jpg';  //此处自己替换本地图片的地址
+            img.onload = function () {
+                var data = getBase64Image(img);
+                var img1 = document.createElement('img');
+                // img1.src = data;
+                // document.body.appendChild(img1);
+                console.log(data);//base64格式
+                console.log(dataURItoBlob(data));
+                //构建formData
+                var blob = dataURItoBlob(data); // 上一步中的函数
+                var canvas = document.createElement('canvas');
+                var dataURL = canvas.toDataURL('image/jpeg', 0.5);
+                var fd = new FormData(document.forms[0]);
+                console.log(document.forms[0])
+                fd.append("the_file", blob, 'image.png');
+                console.log(fd);
+                img1.src = data;
+                document.body.appendChild(img1);
+                //上面的the_file为这个文件的key，等效于input中的name，image.png则是文件名，由于base64的图片信息是不带文件名的，所以可以手动指定一个，这个参数是可选的
+
+            }
+        }
+        main()
+
+        //base64转为blob格式
+        function dataURItoBlob(urlData) {
+            const bytes = window.atob(urlData.split(',')[1]);        // 去掉url的头，并转换为byte
+            // 处理异常,将ascii码小于0的转换为大于0
+            const ab = new ArrayBuffer(bytes.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < bytes.length; i++) {
+                ia[i] = bytes.charCodeAt(i);
+            }
+            return new Blob([ab], { type: 'image/png' });
+        }
+
+
+
+        //ajax提交
+        // $.ajax({
+        //     url: 'http://www.example.com/upload',
+        //     method: 'POST',
+        //     processData: false, // 必须
+        //     contentType: false, // 必须
+        //     dataType: 'json',
+        //     data: fd,
+        //     success(data) {
+        //         console.log(data);
+        //     }
+        // });
     </script>
 </body>
 
