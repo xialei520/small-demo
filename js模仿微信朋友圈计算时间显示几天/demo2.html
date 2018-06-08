@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        time();
+        function time() {
+            var h = new Date().getHours();
+            h = h > 10 ? h : '0' + h;
+            var m = new Date().getMinutes();
+            m = m > 10 ? m : '0' + m;
+            var num = new Date().getDay();
+            num = getDay(num);
+            console.log(h + ':' + m + ',' + num)
+        }
+        function getDay(num) {
+            switch (num) {
+                case 0:
+                    return '星期日'
+                    break;
+                case 1:
+                    return '星期一'
+                    break;
+                case 2:
+                    return '星期二'
+
+                    break;
+                case 3:
+                    return '星期三'
+
+                    break;
+                case 4:
+                    return '星期四'
+
+                    break;
+                case 5:
+                    return '星期五'
+
+                    break;
+                case 6:
+                    return '星期六'
+                    break;
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

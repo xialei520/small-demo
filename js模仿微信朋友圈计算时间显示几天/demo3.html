@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        getregtime(1528427664)
+        // getregtime(1528327814)//2018-06-07 07:30:14
+        // getregtime(1528349414)//2018-06-07 13:30:14
+        // getregtime(1528263014)//2018-06-06 13:30:14
+        // getregtime(1528155014)//2018-06-05 07:30:14
+        function getregtime(time) {
+            var currentTime = Date.parse(new Date());
+            console.log(new Date().toLocaleDateString());//显示当前年月日
+            console.log(Date.parse(new Date().toLocaleDateString()));//将当日凌晨时间转为毫秒数
+            console.log(Date.parse(new Date()))//将当前时间转化为毫秒数
+            d_day = time * 1000;
+            //var day = Math.abs(parseInt((d_day - currentTime) / 1000 / 3600 / 24)); //计算日期
+            var currentDate = Date.parse(new Date().toLocaleDateString());
+            console.log(d_day);
+
+            var day = ((currentDate - d_day) / 1000 / 3600 / 24); //计算日期
+            var hour = (parseInt((currentTime - currentDate) / 1000 / 3600)); //计算小时
+            // var minutes = (parseInt((currentTime - d_day) / 1000 / 60)); //计算分钟
+            // var seconds = (parseInt((currentTime - d_day) / 1000)); //计算秒
+            if (day >= 7) {
+                var newtime = formatDateTime(time);
+            } else if (day >= 2) {
+                var newtime = Math.floor(day) + "天前";
+            } else if (day >= 1 && day < 2) {
+                var newtime = '前天'
+
+            } else if (day > 0 && day < 1) {
+                var newtime = "昨天";
+            } else if (hour > 0 && hour < 24) {
+                console.log('今天')
+                var date = new Date();
+            date.setTime(time * 1000);
+                var h = date.getHours();
+                h = h > 10 ? h : '0' + h;
+                var m = date.getMinutes();
+                m = m > 10 ? m : '0' + m;
+                var newtime = h + ':' + m;
+                // console.log(h + ':' + m)
+            }
+            console.log(newtime);
+            return newtime;
+        }
+
+        function formatDateTime(timeStamp) {
+            var date = new Date();
+            date.setTime(timeStamp * 1000);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            var h = date.getHours();
+            h = h < 10 ? ('0' + h) : h;
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            minute = minute < 10 ? ('0' + minute) : minute;
+            second = second < 10 ? ('0' + second) : second;
+            //				return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+            return y + '-' + m + '-' + d;
+
+        };
+    </script>
+</body>
+
+</html>
