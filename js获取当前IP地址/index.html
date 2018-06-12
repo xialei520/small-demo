@@ -15,22 +15,22 @@
     <script type="text/javascript">  
 
         //闭包
-        var foo = function(json) {
-           console.log(json.ip);
-           var n = json.ip;
-           console.log(n);
-           return (function(){
-               console.log(n);
-               return n;
-           })()
-        }
-        console.log(foo());
+        // var foo = function(json) {
+        //    console.log(json.ip);
+        //    var n = json.ip;
+        //    console.log(n);
+        //    return (function(){
+        //        console.log(n);
+        //        return n;
+        //    })()
+        // }
+        // console.log(foo());
         
         //本地缓存
-        // function foo(json){
-        //     localStorage.setItem('ip', json.ip);
-        // }
-        // console.log(localStorage.getItem('ip'));
+        function foo(json){
+            localStorage.setItem('ip', json.ip);
+        }
+        console.log(localStorage.getItem('ip'));
     </script>
      <script type="text/javascript" src="http://freegeoip.net/json/?callback=foo"></script>
     
