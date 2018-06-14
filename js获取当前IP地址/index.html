@@ -9,32 +9,30 @@
 </head>
 
 <body>
-    <div id="depcity"></div>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
-     
-    <script type="text/javascript">  
-
-        //闭包
-        // var foo = function(json) {
-        //    console.log(json.ip);
-        //    var n = json.ip;
-        //    console.log(n);
-        //    return (function(){
-        //        console.log(n);
-        //        return n;
-        //    })()
-        // }
-        // console.log(foo());
-        
-        //本地缓存
-        function foo(json){
-            localStorage.setItem('ip', json.ip);
-        }
-        console.log(localStorage.getItem('ip'));
-    </script>
-     <script type="text/javascript" src="http://freegeoip.net/json/?callback=foo"></script>
     
-   
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">  
+        var ip;
+        $.ajax({
+            url:'http://freegeoip.net/json/',
+            dataType:'json',
+            async:false,
+            success:function(data){
+                // console.log(data.ip);
+                ip = data.ip;
+            },
+            error: function(){
+                console.log('error')
+            }
+        })
+        console.log(ip)
+    </script>
+
+    <!-- <script async type="text/javascript" src="http://freegeoip.net/json/?callback=foo" id="js"></script> -->
+    
+    
+
+
 </body>
 
 </html>
