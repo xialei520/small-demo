@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul li:nth-child(2n){
+            background: red;
+        }
+        ul li:nth-child(2n+1){
+            background: green;
+        }
+    </style>
+</head>
+<body>
+     <ul id='demo'>
+         <li v-for='i in arr' @click="del(i)">{{i}}</li>
+         
+     </ul>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.min.js"></script>
+    <script>
+        var demo = new Vue({
+            el: '#demo',
+            data:{
+                arr:[1, 2, 3, 4, 5, 6]
+            }, 
+            mounted:function(){
+
+            },
+            methods:{
+                del: function(i){
+                    console.log(i)
+                    // this.arr.forEach(function(item, index, arr){
+                    //     if(i == item){
+                    //         arr.splice(index, 1);
+                    //     }
+                    // })
+                    
+                    for(var j = 0; j < this.arr.length; j++){
+                        if(i == this.arr[j]){
+                            this.arr.splice(j, 1);
+                        }
+                    }
+                }
+            }
+        })
+       
+        // var li = document.getElemensByTagName('li');
+        // li.forEach(function(item, index, arr){
+        //     arr.forEach(function(i, j, a){
+        //         item.innerHTML = i;
+        //     })
+        // })
+    </script>
+</body>
+</html>
