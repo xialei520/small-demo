@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,45 @@
     <title>Document</title>
 
 </head>
+
 <body>
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script>
+        function jsonpCallback(data){
+            console.log(JSON.stringify(data.data))
+        }
+    </script>
+    <script>
+        var ip = '123.123.123.123';
         $.ajax({
-            url:"http://ip.taobao.com/service/getIpInfo.php?ip=123.123.123.123",
-            type:'get',
-            dataType:'json',
-            success: function(data){
-                console.log(data)
+            url: "http://ip.taobao.com/service/getIpInfo.php?ip="+ip,
+            type: 'get',
+            cache:false,
+            timeout:5000,
+            async:false,
+            dataType: 'jsonp',
+            jsonpCallback:'jsonpCallback',
+            jsonp:'callback',
+            success: function (data) {
+                console.log("data")
             }
         })
+        function jsonpCallback(){
+            console.log('111111')
+        }
+        
     </script>
+     <script>
+            function jsonpCallback(data){
+                console.log(JSON.stringify(data))
+            }
+        </script>
+    <!-- <script>
+        var ip = '123.123.123.123'
+        var oScript = document.createElement('script');
+        oScript.src = 'http://ip.taobao.com/service/getIpInfo.php?ip=123.123.123.123&jsonp=callbackFunction';
+        document.body.appendChild(oScript);
+    </script> -->
 </body>
+
 </html>
