@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px
+		}
+
+		#div1 {
+			position: relative;
+			border: 1px solid black;
+			width: 680px;
+			height: 170px;
+			margin: 100px auto;
+			overflow: hidden;
+		}
+
+		#div1 ul {
+			position: absolute;
+			left: 0
+		}
+
+		#div1 ul li {
+			list-style: none;
+			float: left;
+			width: 150px;
+			height: 150px;
+			padding: 10px
+		}
+
+		#div1 ul li img {
+			width: 150px;
+			height: 150px;
+		}
+
+		 
+	</style>
+	<script src="js/startMove.js"></script>
+	<script>
+		window.onload = function () {
+			var oDiv = document.getElementById("div1");
+			var oUl = oDiv.getElementsByTagName("ul")[0];
+			var aLis = oUl.getElementsByTagName("li");
+			
+
+			 
+
+			//直接拷贝一份添加在ul的尾巴上
+			oUl.innerHTML += oUl.innerHTML;
+			//将ul的宽度变成原来的两倍
+			oUl.style.width = aLis.length * aLis[0].offsetWidth + "px";
+
+			var timer = null;
+			//timer = setInterval(function(){
+			//如果ul滚动到一半的位置，从头开始重新去滚动
+			/*if(oUl.offsetLeft < -oUl.offsetWidth / 2){
+				oUl.style.left = 0;
+			}
+			oUl.style.left = oUl.offsetLeft - 5 + "px";*/
+
+			//两秒钟滚动一个图片的宽度
+			/*startMove(oUl, {
+				left: oUl.offsetLeft - aLis[0].offsetWidth
+			},function(){
+				//动画结束以后，判断动画的点是不是oUl的一半
+				if(oUl.offsetLeft <= -oUl.offsetWidth / 2){
+					oUl.style.left = 0;
+				}
+			})
+
+		}, 2000);
+*/
+			timer = setInterval(timerInner, 2000);
+
+			function timerInner() {
+				startMove(oUl, {
+					left: oUl.offsetLeft - aLis[0].offsetWidth
+				}, function () {
+					//动画结束以后，判断动画的点是不是oUl的一半
+					if (oUl.offsetLeft <= -oUl.offsetWidth / 2) {
+						oUl.style.left = 0;
+					}
+				})
+			}
+			 
+
+
+			//添加移入移除事件
+			oDiv.onmouseover = function () {
+				clearInterval(timer);
+			}
+
+			oDiv.onmouseout = function () {
+				timer = setInterval(timerInner, 2000);
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div id="div1">
+		<ul>
+			<li>
+				<img src="img/1.jpg" />
+			</li>
+			<li>
+				<img src="img/2.jpg" />
+			</li>
+			<li>
+				<img src="img/3.jpg" />
+			</li>
+			<li>
+				<img src="img/4.jpg" />
+			</li>
+		</ul>
+	</div>
+
+	 
+</body>
+
+</html>
