@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "
+http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd
+">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;"
+    />
+    <title>下拉刷新</title>
+</head>
+<style>
+    div {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    div ul {
+        margin: 0;
+        position: absolute;
+        top: -40px;
+        left: 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    div ul li {
+        list-style-type: none;
+        text-align: center;
+        border-bottom: 1px solid #999;
+        line-height: 40px;
+        margin: 0;
+    }
+
+    .div {
+        height: 1000px;
+        width: 100%;
+        background: #F00;
+        margin-top: 500px;
+    }
+</style>
+
+<body>
+    <!--滑动绑定元素 cont需要定位-->
+    <div class="all">
+        <ul class="cont">
+            <li>
+                <img src="../refresh/slide-up-down/slide-up-down/2787117_161300358107_1.gif" height="20">
+            </li>
+            <li>
+                <span id="test">下拉刷新</span>
+            </li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+    <!--滑动绑定元素结束-->
+    <div class="div"></div>
+    <!--页面元素-->
+    <script>
+        var _sroll = document.querySelector('.all');
+        var outscroll = document.querySelector('.cont');
+        var _test = document.querySelector('#test');
+        var _star = 0;
+        //获取手指最初的位置,添加一个触摸开始的监听事件
+        _sroll.addEventListener('touchstart', function (event) {
+            //获取手指数组中的第一个（可以用targetTouches）
+            var _touch = event.touches[0];
+            //获取滑动时手指的y坐标+
+            _star = _touch.pageY;
+        }, false);
+        //获取滑动的距离，添加一个触摸滑动的监听事件
+        _sroll.addEventListener('touchmove', function (event) {
+            //获取手指数组中的第一个（可以用targetTouches）
+            var _touch = event.touches[0];
+            outscroll.style.top = outscroll.offsetTop + _touch.pageY - _star + 'px';
+            //获取滑动后手指的y坐标
+            _star = _touch.pageY;
+            _test.innerHTML = '放开刷新';
+        }, false);
+        //添加屏幕触摸接触结束的事件
+        _sroll.addEventListener('touchend', function (event) {
+            //初始化手指触摸的y坐标
+            _star = 0;
+            //获取下拉元素的top值
+            var top = outscroll.offsetTop;
+            //如果大于40就刷新
+            if (top > 0) {
+                //循环慢慢的收缩
+                var time = setInterval(function () {
+                    outscroll.style.top = outscroll.offsetTop - 2 + 'px';
+                    //如果top等于原始值，停止收缩
+                    if (outscroll.offsetTop <= -40) {
+                        clearInterval(time);
+                        //刷新页面
+                        location.reload();
+                    }
+                }, 1);
+            }
+        }, false);
+    </script>
+</body>
+
+</html>
