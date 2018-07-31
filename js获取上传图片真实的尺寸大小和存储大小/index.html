@@ -21,7 +21,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var data = e.target.result;//base64格式
-                    console.log(e)
+                    console.log(data)
                     //加载图片获取图片真实宽度和高度  
                     var image = new Image();
                     image.onload = function () {
@@ -42,6 +42,7 @@
                     alert(width + '======' + height + "=====" + fileSize);
                 }
                 image.src = input.value;
+                console.log(input.value)
             }
         }
 
