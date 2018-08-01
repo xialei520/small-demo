@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>LocalResizeIMG</title>
+
+</head>
+
+<style>
+    body {
+
+        margin: 20px 20%;
+
+        color: #777;
+
+        text-align: center;
+
+    }
+</style>
+
+<body>
+
+    <h1 class="text-center">LocalResizeIMG-本地压缩 1.0</h1>
+
+    <hr/>
+
+    <input type="file" />
+
+    <hr/>
+
+
+
+    <!-- javascript
+
+        ================================================== -->
+
+    <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js" type="text/javascript"></script>
+
+    <script src="LocalResizeIMG.js" type="text/javascript"></script>
+
+
+
+    <!-- mobileBUGFix.js 兼容修复移动设备 -->
+
+    <script src="mobileBUGFix.mini.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        $('input:file').localResizeIMG({
+
+            width: 200,
+
+            quality: 0.8,
+
+            success: function (result) {
+
+                var img = new Image();
+
+                img.src = result.base64;
+
+
+
+                $('body').append(img);
+                console.log(result);
+
+                var form = document.forms[0];
+
+                var formData = new FormData(form);   //这里连带form里的其他参数也一起提交了,如果不需要提交其他参数可以直接FormData无参数的构造函数
+
+                //convertBase64UrlToBlob函数是将base64编码转换为Blob  
+                formData.append("imageName", convertBase64UrlToBlob(result.base64));  //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同
+
+
+                //ajax提交form表单
+
+                $.ajax({
+                    url: '/save_photos/',
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    processData: false,         // 告诉jQuery不要去处理发送的数据
+                    contentType: false,        // 告诉jQuery不要去设置Content-Type请求头
+
+                    success: function (data) {
+                        console.log(data);
+                        console.log(data.status);
+                        if (data.status == 'fails') {
+                            swal({
+                                title: "请注意",
+                                text: "请把信息选择完整",
+                                timer: 1000
+                            });
+                            $('body').mLoading("hide");
+                            return false;
+                        }
+                        if (data.status == 'success') {
+                            $('body').mLoading("hide");
+                            swal({
+                                title: "干的不错！",
+                                text: "图片已经保存！",
+                                timer: 1000
+                            });
+
+                        }
+
+
+                    },
+                    xhr: function () {            //在jquery函数中直接使用ajax的XMLHttpRequest对象
+                        var xhr = new XMLHttpRequest();
+
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                                console.log("正在提交." + percentComplete.toString() + '%');        //在控制台打印上传进度
+                            }
+                        }, false);
+
+                        return xhr;
+                    }
+
+                });
+            }
+
+       
+
+        });
+        /**
+        * 将以base64的图片url数据转换为Blob 可以直接上传文件
+        * @param urlData
+        *            用url方式表示的base64图片数据
+        */
+        function convertBase64UrlToBlob(urlData) {
+
+            var bytes = window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte
+
+            //处理异常,将ascii码小于0的转换为大于0
+            var ab = new ArrayBuffer(bytes.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < bytes.length; i++) {
+                ia[i] = bytes.charCodeAt(i);
+            }
+
+            return new Blob([ab], { type: 'image/png' });
+        }
+
+    </script>
+
+</body>
+
+</html>
