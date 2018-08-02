@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 400px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="Img" src="" alt="">
+    <script>
+        var imgSrc = "http://localhost/small-demo/imageCompress/1.jpg";//本地项目文件夹下的图片
+        function getBase64(img) {//传入图片路径，返回base64
+            function getBase64Image(img, width, height) {
+                var canvas = document.createElement("canvas");
+                canvas.width = width ? width : img.width;
+                canvas.height = height ? height : img.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                console.log(canvas)
+                var dataURL = canvas.toDataURL('image/jpeg', 0.1);//此步已经将本地路径转为压缩后的base64图片；
+
+                document.getElementById('Img').src = dataURL;
+                console.log(base64ToBlob(dataURL));
+                download()
+                function download() {
+                    // let imgData = 'data:image/png;base64,iVBORw0KGgoAAAANSUh........';
+                    downloadFile('测试.png', dataURL);
+                }
+                return dataURL;
+            }
+            var image = new Image();
+            //解决跨域
+            image.setAttribute("crossOrigin", 'Anonymous')
+            // image.crossOrigin = '';
+            image.src = img;
+            // var deferred = $.Deferred();
+            if (img) {
+
+                image.onload = function () {
+
+                    console.log(image.height)
+
+                    console.log('success')
+                    getBase64Image(image, image.width, image.height);
+                }
+            }
+        }
+        
+        getBase64(imgSrc)
+
+        //生成Bloab对象
+        function base64ToBlob(urlData) {
+            var arr = urlData.split(',');
+            var mime = arr[0].match(/:(.*?);/)[1] || 'image/png';
+            // 去掉url的头，并转化为byte
+            var bytes = window.atob(arr[1]);
+            // 处理异常,将ascii码小于0的转换为大于0
+            var ab = new ArrayBuffer(bytes.length);
+            // 生成视图（直接针对内存）：8位无符号整数，长度1个字节
+            var ia = new Uint8Array(ab);
+
+            for (var i = 0; i < bytes.length; i++) {
+                ia[i] = bytes.charCodeAt(i);
+            }
+
+            return new Blob([ab], {
+                type: mime
+            });
+        }
+
+        function downloadFile(fileName, content) {
+            let aLink = document.createElement('a');
+            let blob = base64ToBlob(content); //new Blob([content]);
+
+            let evt = document.createEvent("HTMLEvents");
+            evt.initEvent("click", true, true);//initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+            aLink.download = fileName;
+            aLink.href = URL.createObjectURL(blob);
+            console.log(aLink.href)
+            // aLink.dispatchEvent(evt);
+            aLink.click()
+        }
+
+
+    </script>
+</body>
+
+</html>
