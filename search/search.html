@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search</title>
+    <link rel="stylesheet" href="weui.min.css">
+    <style>
+        .weui-panel__bd a {
+            background: #F3F3F3;
+            border-radius: 5px;
+            display: inline-block;
+            /* width: 2.5rem; */
+            padding: 2px 6px;
+            margin: 5px 3px;
+            color: #777;
+            font-size: .8rem;
+            letter-spacing: 3px;
+        }
+
+        .content {
+            background: #EFEFF4;
+        }
+
+        .weui-cells {
+            margin-top: 0;
+        }
+
+        .weui-search-bar {
+            background-color: #51C332;
+        }
+
+        #searchCancel {
+            color: #fff;
+        }
+
+        .weui-panel__hd {
+            color: #51C332;
+        }
+
+        .weui-panel__hd2:after {
+            border: 0;
+        }
+
+        .refresh {
+            position: relative;
+
+        }
+
+        .refresh img {
+            position: absolute;
+            top: 35%;
+            right: 1rem;
+            /* animation: refresh 2s infinite; */
+        }
+
+        @keyframes refresh {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .animation-rotate {
+
+            animation: refresh 1s;
+        }
+
+        .weui-panel__hd2 {
+            position: relative;
+        }
+
+        .weui-panel__hd2 img {
+            position: absolute;
+            top: 35%;
+            right: 1rem;
+        }
+        #searchResult{
+            position:absolute;
+            top:44px;
+            left:0;
+            z-index: 3;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div>
+        <div class="weui-cells searchbar-result" id="searchResult" style="width: 100%;display: none; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd refresh">热门搜索
+                <img id="refreshimg" style="width: 1rem;height: 1rem;" src="刷新.png" alt="刷新列表" onclick="refresh()">
+            </div>
+            <div class="weui-panel__bd" style="padding:.7rem .6rem .7rem;">
+                <a href="javascript:;">猪心</a>
+                <a href="javascript:;">中节翅</a>
+                <a href="javascript:;">猪心</a>
+                <a href="javascript:;">猪心</a>
+                <a href="javascript:;">短脚</a>
+                <a href="javascript:;">猪心</a>
+                <a href="javascript:;">猪心</a>
+            </div>
+        </div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd weui-panel__hd2">最近搜索
+                <img style="width: 1reml;height: 1rem;" src="删 除.png" alt="">
+            </div>
+            <div class="weui-cells">
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>cell standard</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src='jquery-2.1.4.js'></script>
+    <script src='jquery-weui.min.js'></script>
+    <script>
+        //点击刷新
+        function refresh() {
+            document.getElementById('refreshimg').className = "animation-rotate";
+            setTimeout(function () {
+                document.getElementById('refreshimg').className = '';
+            }, 1000);
+        }
+        //显示搜索列表
+        $('#searchInput').bind('input propertychange', function () {
+            var text = $("#searchInput").val();
+       
+            if (text) {
+                $('#searchResult').css('display', 'block');
+                $('.weui-panel_access').css('display', 'none');
+                console.log('kkk')
+            }else{
+                $('#searchResult').css('display', 'none');
+            }
+        });
+        //点击清除图标/取消，搜索列表隐藏
+        $("#searchClear, #searchCancel").click(function(){
+            $('#searchResult').css('display', 'none');
+            $('.weui-panel_access').css('display', 'block');
+        })
+        
+    </script>
+</body>
+
+</html>
