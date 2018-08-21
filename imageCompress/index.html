@@ -39,7 +39,7 @@
                         download()
                         function download() {
                             // let imgData = 'data:image/png;base64,iVBORw0KGgoAAAANSUh........';
-                            downloadFile('测试.png', data);
+                            downloadFile('测试.jpg', data);
                         }
                     }
                 }
@@ -59,7 +59,7 @@
             //利用canvas进行绘图
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             //将原来图片的质量压缩到原先的0.2倍。
-            var data = canvas.toDataURL('image/jpeg', 0.9); //data url的形式
+            var data = canvas.toDataURL('image/jpeg', 0.8); //data url的形式
             console.log(data.length)
             document.getElementById('Img').src = data;
             return data;
