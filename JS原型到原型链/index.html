@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(){
+
+        }
+        var person = new Person();
+        // person.name = 'xialei';
+        // person.age = '18';
+        Person.prototype.name = 'xiaoming';
+        console.log(person);
+        console.log(Person.prototype == person.__proto__)
+        console.log(Person == Person.prototype.constructor)
+        console.log(person.__proto__ == Person.prototype)
+        console.log(Object.getPrototypeOf(person) == Person.prototype);
+        console.log(Object.getPrototypeOf(person) == person.__proto__);
+
+        person.name = 'xiaowang';
+        console.log(person.name);
+        delete person.name;
+        console.log(person.name);
+    </script>
+</body>
+</html>
