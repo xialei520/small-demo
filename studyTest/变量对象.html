@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(this)
+        var a = 1;
+        console.log(this.a)
+
+        this.window.b = 2;
+        console.log(this.b);
+        console.log(window.b)
+
+        function dd(a){
+            console.log(d);
+            var d = 2;
+        }
+        // dd();
+        // d is not defined
+        console.log(dd())
+    </script>
+</body>
+</html>
