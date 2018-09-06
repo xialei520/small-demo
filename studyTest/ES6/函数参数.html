@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function arr(a, b, ...args){
+        //     alert(a);
+        //     alert(b);
+        //     alert(args);
+        // }
+        // arr(1, 2, 3, 4, 5,6)
+
+        let arr = [1, 2, 3, 4];
+        // aaa(...arr);
+        console.log([...arr])
+        function aaa(a, b, c){
+            alert(a);
+            alert(b)
+            alert(c)
+        }
+        // aaa(1,2, 3)
+
+        function bbb(a, b){
+            alert(a+b);
+        }
+        function ccc(...args){
+            bbb(...args);
+        }
+        // ccc(2,3);
+        let k = [1, 2, 3];
+        let o = [4, 5, 6];
+        console.log(...k, ...o)
+
+        
+        let obj  ={
+            'age': 19,
+            'sex': '男',
+            'arr': '[1,2,3]'
+        }
+        let obj1 = {
+            'aaa': 'kkkkk',
+            ...obj
+        }
+        let obj2 = {
+            'aaa': 'kkkkkk',
+            obj
+        }
+        console.log(obj1)
+        console.log(obj2)
+    </script>
+</body>
+</html>
