@@ -1,0 +1,9 @@
+{
+    "dependencies": {
+        "baidu-aip-sdk": "^2.1.0",
+        "qs": "^6.5.1"
+    },
+    "scripts": {
+        "web": "nohup node voice.js &"
+    }
+}
