@@ -16,7 +16,7 @@ app.use(function(req, res, next){
         res.setHeader('Access-Control-Allow-Credentials', true);
         //预检的存活时间
         res.setHeader('Access-Control-Max-Age', 6000);
-        //允许前端获取哪个头
+        //允许返回的头
         res.setHeader('Access-Control-Expose-Headers', 'name');
 
         // 该预检测不稳定，需要用max-age来控制发送预检测的时间
