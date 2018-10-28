@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 添加meta标签 -->
+    <!-- whatwg的标准 -->
+    <meta referrer='never'>
+    <!-- MDN的标准 -->
+    <meta referrer='no-referrer'>
+
+
+    <title>Document</title>
+    <style>
+        .content{
+            width: 90%;
+            height: auto;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .content .item{
+            width: 40%;
+            
+        }
+        .content .item img{
+            width: 100%;
+            height:auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="item">
+            <!-- 添加ReferrerPolicy属性 -->
+            <img src="https://bdn.135editor.com/files/users/454/4547206/201810/v6DRqEYL_Y7Mv.jpg" referrerPolicy="no-referrer" alt="">
+        </div>
+        <div class="item">
+            <!-- 第三方代理 -->
+            <img src="https://images.weserv.nl/?url=foo.com/foo.jpg&w=100" />
+        </div>
+    </div>
+</body>
+</html>

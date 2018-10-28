@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        function jsonp({url, params, cb}){
+        function jsonp({ url, params, cb }) {
             return new Promise((relsove, reject) => {
                 let script = document.createElement('script');
 
                 //定义全局的自执行回调函数
-                window[cb] = function(data){
+                window[cb] = function (data) {
                     relsove(data);
                     document.body.removeChild(script);
                 }
-                params = {...params, cb};
+                params = { ...params, cb };
                 console.log(params)
                 let arrs = [];
-                for(let key in  params){
+                for (let key in params) {
                     arrs.push(`${key}=${params[key]}`);
                 }
                 script.src = `${url}?${arrs.join('&')}`;
@@ -29,12 +31,13 @@
         }
         jsonp({
             url: 'http://localhost:8888/say',
-            params: {wd: '美女'},
+            params: { wd: '美女' },
             cb: 'show'
         }).then(data => {
             console.log(data);
         })
-         
+
     </script>
 </body>
+
 </html>
