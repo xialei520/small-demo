@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript" src="./App.js"></script>
+	<script>
+		let a = {name: 'xialei', age: 18, sex: '男'};
+		let b = {sex: '女'}
+		let c = Object.assign(a,b);
+		console.log(c);
+		console.log(b); //源对象不会改变
+		console.log(a); //目标对象也会改变
+		const account = '371329199211173310';
+		console.log(App.protect(account));
+		console.log(App.legalMobile('18865513369'));
+	</script>
+</body>
+</html>
