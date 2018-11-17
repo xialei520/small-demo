@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <span v-bind:title="message">
+             {{message}}
+        </span>
+        <p v-if="seen">现在你看到我了</p>
+        <ol>
+            <li v-for='tode in todos'>{{tode.text}}</li>
+        </ol>
+        <button v-on:click="reverseMessage">逆转小雪</button>
+        <p>{{message}}</p>
+        <input type="text" v-model='message'>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue.js!',
+                seen: true,
+                todos: [
+                    { text: '学习 JavaScript' },
+                    { text: '学习 Vue' },
+                    { text: '整个牛项目' }
+                ]
+            },
+            methods:{
+                reverseMessage(){
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

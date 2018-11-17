@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{todo.text}}</li>'
+        })
+        const app = new Vue({
+            el: '#app',
+            data: {
+                list:[{
+                    text: '代办事项1'
+                },{
+                    text: '代办事项2'
+                }],
+                a: 1
+            },
+            template: `
+                <div>
+                    <p>{{rawHtml}}</p>
+                    <todo-item :todo='item' v-for="item in list"></todo-item>
+                    <span v-html="rawHtml"></span>
+                </div>
+            `,
+            mounted(){
+                console.log(this.$data)
+            },
+            beforeCreate(){
+                console.log('a is'+ this.a)
+            },
+            created(){
+                console.log('a is'+ this.a)
+            }
+        })
+    </script>
+</body>
+</html>
