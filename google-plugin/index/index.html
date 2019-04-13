@@ -5,20 +5,20 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="index.css"/>
 	</head>
-	<body>
+	<body >
 		<div id="container">
 			<p class="text">二维码生成器</p>
 			<div class="address1">
 				<span>地址一: </span>
-				<input type="text" name="" id="" value="" v-model="url1" />
+				<input type="text" name="" id="" value="" v-model="url1" @keyup.enter="enter"/>
 			</div>
 			<div class="address2">
 				<span>地址二: </span>
-				<input type="text" name="" id="" value="" v-model="url2"/>
+				<input type="text" name="" id="" value="" v-model="url2" @keyup.enter="enter"/>
 			</div>
 			<div class="address3">
 				<span>地址三: </span>
-				<input type="text" name="" id="" value="" v-model="url3"/>
+				<input type="text" name="" id="" value="" v-model="url3" @keyup.enter="enter"/>
 			</div>
 			<p class="btn">
 				<a href="javascript:;" @click='generate'>生成QR图</a>

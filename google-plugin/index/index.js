@@ -35,10 +35,21 @@ var vm = new Vue({
 					// correctLevel : QRCode.CorrectLevel.H
 				});
 				this.once = !this.once;
+				var storage = window.localStorage;
+				var data = {
+					url1: this.url1,
+					url2: this.url2,
+					url3: this.url3
+				}
+				var d = JSON.stringify(data)
+				storage.url = d;
 			}
 			
 			 
 			
+		},
+		enter(){
+			this.generate()
 		}
 	},
 	 updated(){
@@ -47,5 +58,16 @@ var vm = new Vue({
 		for(var i = 0; i < imgs.length; i++){
 			imgs[i].style.display = 'none'
 		}
-	 }
+	 },
+	mounted(){
+		if(window.localStorage.url){
+			console.log(window.localStorage.url)
+			var a = JSON.parse(window.localStorage.url)
+			this.url1 = a.url1;
+			this.url2 = a.url2;
+			this.url3 = a.url3;
+		}
+		
+	} 
+	
 })
