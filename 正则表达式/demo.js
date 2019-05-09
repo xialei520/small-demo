@@ -23,3 +23,7 @@ console.log(reg.test(email))
 //search
 const str = '125dfad_=+';
 console.log(str.search(/[2-8]+d/))
+
+
+const path = require('path')
+console.log(path.resolve(__dirname))
