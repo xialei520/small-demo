@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	ddd
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script>
+		console.log('123')
+		$.ajax({
+			url: '/',
+			type: 'get',
+			success: function(res){
+				console.log(res)
+			}
+		})
+	</script>
+</body>
+</html>
