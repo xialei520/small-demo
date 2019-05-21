@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "archiver": "^3.0.0",
-    "ora": "^3.4.0"
+    "ora": "^3.4.0",
+    "puppeteer": "^1.16.0"
   },
   "devDependencies": {
     "rimraf": "^2.6.3"
