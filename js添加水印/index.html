@@ -8,50 +8,48 @@
 	<style>
 		#container{
 			width: 100%;
-			height: 500px;
-		}
-		html, body{
 			height: 100%;
-			width: 100%;
 		}
+	 	body{
+	 		height: auto;
+	 	}
 	</style>
 </head>
-<body>
-	<div id='container'></div>
+<body style="overflow-x: hidden" >
+	<div id='container' class="test">
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+	    <h2 class="toCanvas"> <a href="javascript:void(0);"> 转成canvas </a></h2>
+
+	</div>
 	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="html2canvas.min.js"></script>
+	<script type="text/javascript" src="canvas2image.js"></script>
 	<script>
 		(function waterMark(){
 			function textBecomeImg(text,fontsize,fontcolor, img){
 				var canvas = document.createElement('canvas');
-				$buHeight = 0;
-				if(fontsize <= 32){ $buHeight = 99; }
-				else if(fontsize > 32 && fontsize <= 60 ){ $buHeight = 2;}
-				else if(fontsize > 60 && fontsize <= 80 ){ $buHeight = 4;}
-				else if(fontsize > 80 && fontsize <= 100 ){ $buHeight = 6;}
-				else if(fontsize > 100 ){ $buHeight = 10;}
-				canvas.height=fontsize + $buHeight ;
-				canvas.padding=30;
+				 
 				var context = canvas.getContext('2d');
-				context.clearRect(0, 0, canvas.width*2, canvas.height);
-				// context.fillStyle = fontcolor;
-				// context.font=fontsize+"px Arial";
-				// context.textAlign = "center";
-				// context.textBaseline = 'middle'; 
-				// context.fillText(text,0,fontsize/2);
-				var canvasWidth = canvas.width/99;
-				canvasWidth = context.measureText(text).width;
-				var clientWith = document.documentElement.clientWith;
-				console.log(clientWith)
-				console.log(document.documentElement.clientWidth)
-				canvas.width = document.documentElement.clientWidth / 2;
-				canvas.height = 200;
+				// context.clearRect(0, 0, canvas.width*2, canvas.height);
+				 
+				// var canvasWidth = canvas.width/99;
+				// 控制字体宽度
+				// canvasWidth = context.measureText(text).width;
+				canvas.width = 300;
+				canvas.height = 150;
 				context.fillStyle = fontcolor;
 				context.font=fontsize+"px Arial";
+				//设置文本基线
 				context.textBaseline = 'middle'; 
-				console.log(img)
-				context.drawImage(img, 10, 	0, 150, canvas.height);    
-				context.fillText(text,150,80);
-				// document.body.appendChild(canvas)
+				context.drawImage(img, 10, 	0, 100, 100);    
+				context.fillText(text,100,50);
 				var dataUrl = canvas.toDataURL('image/png');
 				return dataUrl;
 			}
@@ -59,11 +57,12 @@
 			var shuiyinDiv = document.createElement('div');
 			var style = shuiyinDiv.style;
 			style.position = 'absolute';
-			style.left = 0;
+			style.left = '-50%';
 			style.top = '-60%';
-			style.width = '100%';
-			style.height = '100%';
-			style.opacity = '1';
+			style.width = '200%';
+			style.height = '200%';
+			style.opacity = '.1';
+			style.overflowX = 'hidden'
 			 //创建新的图片对象
 		    var img = new Image();
 		     //指定图片的URL
@@ -76,36 +75,38 @@
 		         //图像的宽度和高度分别缩放到350px和100px
 		          
 		          
-		        style.background = "url("+textBecomeImg('青岛银行',50,"red", img)+")";
+		        style.background = "url("+textBecomeImg('青岛银行',30,"red", img)+")";
 				style.zIndex = 9999999991;
 				style.transform = "rotate(-30deg)";
 				style.pointerEvents = "none";
-				document.body.appendChild(shuiyinDiv);    
+				
+				// document.body.appendChild(shuiyinDiv);    
+				document.getElementById('container').appendChild(shuiyinDiv)
 		    };
 		    
 						
 		})();
  		
- 		// function watermarkWord(id, watermarkImg , watermarkText) {
+ 		 
+	</script>
+	<script type="text/javascript">
+	    var test = $(".test").get(0); //将jQuery对象转换为dom对象
+	    // 点击转成canvas
+	    $('.toCanvas').click(function(e) {
+	        // 调用html2canvas插件
+	        html2canvas(test, {
+	        	scale: 1, //缩放比例
+	        	height: $('body').outerHeight,
+	        	width: $('body').outerWidth
+	        }).then(function(canvas) {
+	            var canvasWidth = canvas.width;
+	            var canvasHeight = canvas.height;
+	           
+                Canvas2Image.saveAsImage(canvas, canvasWidth, canvasHeight, 'png');
+         
 
-   //          var screenHeight = window.screen.height
-   //          var watermarkImg = watermarkImg ;
-   //          var watermarkText =  watermarkText;
-            
-   //          if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/9./i) == "9.") {
-   //              var step = 180 / 480 * screenHeight;
-   //              for (var i = 0; i <= parseInt($("body").height() / step); i++) {
-   //                  $('body').append('<div style="z-index:-999;width:100%;text-align:center;opacity:0.2;color:#000;position:absolute;top:' + step * (i) + 'px;font-size:2em;transform:rotate(-30deg); -ms-transform:rotate(-30deg); -o-tranform:rotate(-30deg); -webkit-transform:rotate(-30deg); -moz-transform:rotate(-30deg);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=10));">' + watermarkText + '<br /><img style="width:8em;" src="' + watermarkImg + '" /></div>');
-   //              }
-   //          } else {
-   //              var step = 180 / 480 * screenHeight;
-   //              for (var i = 0; i <= parseInt($("body").height() / step); i++) {
-   //                  $('body').append('<div style="z-index:-999;width:100%;text-align:center;opacity:0.5;color:#000;position:absolute;top:' + step * (i) + 'px;font-size:2em;transform:rotate(-30deg); -ms-transform:rotate(-30deg); -o-tranform:rotate(-30deg); -webkit-transform:rotate(-30deg); -moz-transform:rotate(-30deg);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=10) progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11=0.866025404, M12=0.5, M21=-0.5, M22=0.866025404);">' + watermarkText + '<br /><img  style="width:8em;" src="' + watermarkImg + '" /></div>');
-   //              }
-   //          }
-   //      }
-   //      var contain = document.getElementById('container');
-   //      watermarkWord(contain, './logo.png', '青岛银行')
+	        });
+	    });
 	</script>
 </body>
 </html>
