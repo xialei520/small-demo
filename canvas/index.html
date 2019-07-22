@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var canvas = document.createElement('canvas');
+		var ctx = canvas.getContext('2d');
+		canvas.width = '500';
+		canvas.height = '500';
+		ctx.fillStyle = 'red';
+		//fillRect() 方法绘制“已填色”的矩形。默认的填充颜色是黑色。
+		ctx.fillRect(20, 20, 100, 100);
+		
+		// strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式。
+		ctx.strokeStyle="#0000ff";
+		//绘制矩形的起始点及宽高
+		ctx.strokeRect(20,20,150,100);
+		document.body.appendChild(canvas);
+	</script>
+</body>
+</html>
