@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			 #div1{width: 100%; background: blue;line-height: 80px;text-align: center;position: absolute;bottom: 0;} 
+			/*img{width: 60;}*/
+			
+		</style>
+		<script>
+		window.onload = function(){
+			var oDiv =  document.getElementById('div1');
+			var aImgs = oDiv.getElementsByTagName('img');
+			var d = 0;
+			var max = 200;
+			document.onmousemove = function(ev){
+				var e = ev || window.event;
+				for(var i = 0; i < aImgs.length; i++){
+					d = getDist(aImgs[i],e);
+					d = Math.min(d,max);
+					aImgs[i].width = (max - d) / max * 100 + 100 ;
+
+				}
+			}
+			//定义函数计算鼠标距离图片中心点的距离
+			function getDist(obj,e){
+			var x = e.clientX - (obj.offsetLeft + obj.offsetWidth / 2 + oDiv.offsetLeft);
+			var y = e.clientY - (obj.offsetTop + obj.offsetWidth / 2 + oDiv.offsetTop);
+			return Math.sqrt(x * x + y * y);
+			}
+			
+		}
+		
+			//图片是等比例缩放,所以只设宽或高就可以
+
+		
+		</script>
+	</head>
+	<body>
+		<div id = "div1">
+			<a href="#"><img src="images/1.png" alt=""></a>
+			<a href="#"><img src="images/2.png" alt=""></a>
+			<a href="#"><img src="images/3.png" alt=""></a>
+			<a href="#"><img src="images/4.png" alt=""></a>
+			<a href="#"><img src="images/5.png" alt=""></a>
+		
+		</div>
+		
+	</body>
+</html>

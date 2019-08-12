@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<!-- <script src = "ajax.js"></script> -->
+		<script>
+		function func(data){
+			// var oDiv = document.createElement("div");
+			var oUl = document.getElementById("ul1");
+
+			/* var arr = JSON.parse(data);
+			for(var i = 0; i < arr.length; i++){
+					 var oLi = document.createElement('li');
+					 oLi.innerHTML = arr[i];
+					 oUl.appendChild(oLi);
+				}*/
+			 var oLi = document.createElement('li');
+			 oLi.innerHTML = data.city;
+			 oUl.appendChild(oLi);
+			 
+			}
+		window.onload = function(){
+			var oInput1 = document.getElementById("input1");
+			var oInput2 = document.getElementById('input2');
+			
+
+			oInput2.onclick = function(){
+				 if(oInput1.value != ""){
+				 	var oScript = document.createElement("script");
+				 	oScript.src = "https://api.asilu.com/phone/?phone=" + oInput1.value + "&callback=func";
+				 	document.body.appendChild(oScript);
+				 }else{
+				 	alert('请输入手机号');
+				 }
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<input type="text" id = "input1">
+		<input type="submit" id = "input2">
+		<ul id = "ul1"></ul>
+	</body>
+</html>

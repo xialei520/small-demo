@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src = "tool.js"></script>
+		<script src = "ajax.js"></script>
+		<script>
+		window.onload = function(){
+
+			if($("#getList").childNodes.length < 4){
+
+			}
+			$("#btn").onclick = function(){
+				$_ajax({
+					// method:"get",
+					url:"http://datainfo.duapp.com/shopdata/getclass.php",
+					success:function(data){
+						var arr = JSON.parse(data);
+						for(var i = 0; i < arr.length; i++){
+							var oBtn = document.createElement('button');
+							oBtn.innerHTML = arr[i].className;
+							oBtn.id = arr[i].classID;
+							$("#getList").appendChild(oBtn);
+						}
+					}
+				});
+			}
+		}
+			
+		</script>
+	</head>
+	<body>
+		<div id = "getList">
+			<input type="button" value="获取分类" id = "btn"/><br/>
+		</div>
+		<ul id = "ul1">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+</html>

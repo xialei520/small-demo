@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#puzzle{
+				width: 300px;
+				height: 300px;
+				background-color: grey;
+				margin: 100px auto;
+				position: relative;
+			}
+			#puzzle div{
+				width: 98px;
+				height: 98px;
+				border: 1px solid white;
+				float: left;
+				line-height: 98px;
+				text-align: center;
+				font-size: 30px;
+				/*margin: 10px;*/
+				/*position: absolute;*/
+			}
+		</style>
+		<script src = "startMove.js"></script>
+		<script src = "tool.js"></script>
+		<script>
+		var currentIndex = 2;
+		window.onload = function(){
+			var oPuzzle = document.getElementById('puzzle');
+			createPuzzle(9, oPuzzle);
+		}
+		function createPuzzle(n, node){
+			for(var i = 0; i < n; i++){
+				var oDiv = document.createElement('div');
+				oDiv.id = i;
+				oDiv.innerHTML = i + 1;
+				oDiv.style.backgroundColor = randomColor();
+				node.appendChild(oDiv);
+				dragBack(oDiv);
+
+			}
+			var nodes = $("#puzzle").getElementsByTagName('div');
+			for(var i = 0; i < nodes.length; i++){
+				nodes[i].style.left = nodes[i].offsetLeft + "px";
+				nodes[i].style.top = nodes[i].offsetTop + "px";
+			}
+			for(var i = 0; i < nodes.length; i++){
+				nodes[i].style.position = "absolute";
+			}
+		}
+
+
+		//拖拽函数
+		function dragBack(obj){
+			var offsetX = 0;
+			var offsetY = 0;
+			var arr = []; //记录路径
+			obj.onmousedown = function(ev){
+				var e = ev || window.event;
+				offsetX = e.clientX - this.offsetLeft;
+				offsetY = e.clientY - this.offsetTop;
+				arr.push({
+					l:obj.offsetLeft + "px",
+					t:obj.offsetTop + "px"
+				})
+				obj.style.zIndex = currentIndex++;
+				document.onmousemove = function(ev){
+					var e = ev || window.event;
+					obj.style.left = e.clientX - offsetX + "px";
+					obj.style.top = e.clientY - offsetY + "px";
+
+					 
+					arr.push({
+						l: obj.offsetLeft + "px",
+						t: obj.offsetTop + "px"
+					})
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					//<2>松手以后可以原路返回,需要记录所走过的路径
+					//启动定时器，往回走
+					var timer = setInterval(function(){
+						var frame = arr.pop();
+						if(frame){
+							obj.style.left = frame.l;
+							obj.style.top = frame.t;
+							var aDivs = $("#puzzle").getElementsByTagName('div');
+							for(var i = 0; i < aDivs.length; i++){
+								if(aDivs[i] != obj && dist(aDivs[i], obj)){
+									//如果满足条件，记得一定要取消定时器
+									clearInterval(timer);
+									var tmp = {
+										l:aDivs[i].offsetLeft + "px",
+										t:aDivs[i].offsetTop + "px"
+
+									}
+									aDivs[i].style.left = arr[0].l;
+									aDivs[i].style.top = arr[0].t;
+									obj.style.left = tmp.l;
+									obj.style.top = tmp.t;
+								}
+							}
+						}else{
+							clearInterval(timer);
+						}
+						
+					}, 20);
+				}
+			}
+		}
+
+
+		//计算距离
+		function dist(node1, node2){
+			var x1 = node1.offsetLeft + node1.offsetWidth / 2;
+			var y1 = node1.offsetTop + node1.offsetHeight / 2;
+			var x2 = node2.offsetLeft + node2.offsetWidth / 2;
+			var y2 = node2.offsetTop + node2.offsetHeight / 2;
+			var n  = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+			if(n < 30){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<div id = "puzzle"></div>
+	</body>
+</html>

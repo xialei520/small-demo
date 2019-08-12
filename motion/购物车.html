@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			#ul1{
+				width: 920px;
+				margin: 100px auto;
+				border: 1px solid red;
+				overflow: hidden;
+			}
+			#ul1 li{
+				list-style: none;
+				width: 230px;
+				float: left;
+				list-style: none;
+			}
+			#ul1 li div{
+				padding: 15px;
+				border:1px solid green;
+			}
+			#ul1 li div button{
+				width: 200px;
+				height: 30px;
+				background-color: orange;
+			}
+			#ul1 li img{
+				width: 200px;
+			}
+		</style>
+		<script src = "tool.js"></script>
+		<script>
+		var arr = [];
+		for(var i = 0; i < 8; i++){
+			arr.push({
+			id:i,
+			img:"1.jpg",
+			title:"迅捷斥候·提莫是竞技游戏《英雄联盟》中的一个英雄角色。他是负责瓦罗兰大陆的班德尔城安全的侦察兵首领，也是班德尔城最富盛名的特种部队之一“主舰斥候队”一"
+			});
+		}
+		
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var oLi = oUl.getElementsByTagName('li');
+			for(var i = 0; i < arr.length; i++ ){
+				var aImg = document.createElement("img");
+				aImg.src = arr[i].img;
+				// alert(aImg);
+				var oP = document.createElement("p");
+				oP.innerHTML = arr[i].title;
+				var oBtn = document.createElement("button");
+				oBtn.innerHTML = "加入购物车";
+				oBtn.id = arr[i].id;
+				// alert(oBtn.id);  
+				var oDiv = document.createElement('div');
+				oDiv.appendChild(aImg);
+				oDiv.appendChild(oP);
+				oDiv.appendChild(oBtn);
+				oLi[i % 4].appendChild(oDiv);
+
+			}
+			oUl.onclick = function(ev){
+				var e = ev || window.event;
+				var target = e.target || window.event.srcElement;
+
+				if(target.nodeName == "BUTTON"){
+
+					var isFirst = $_cookie("goods") ? false : true;
+					//第一次添加
+					// alert("111");
+					if(isFirst){
+						$_cookie("goods", target.id + ":1",{expires:7});
+					}else{
+					//查找是否以前存储过
+					
+						var cookieStr = $_cookie("goods");
+						var arr = cookieStr.split(":");
+						var same = false;
+						for(var i = 0; i < arr.length;){
+							if(arr[i] == target.id){
+								arr[i + 1] = Number(arr[i + 1]) + 1;
+								cookieStr = arr.join(":");
+								same = true;
+								break;
+							}
+							i += 2;
+
+						}
+						 
+						if(!same){
+							cookieStr += ":" + target.id + ":1";
+							
+						}
+						$_cookie("goods", cookieStr, {
+								expires:7
+							});
+					}
+					alert($_cookie("goods"));
+				}
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<ul id = "ul1">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+</html>

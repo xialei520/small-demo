@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#_ul li{
+				width: 200px;
+				height: 100px;
+				background-color:orange;
+				list-style: none;
+				float: left;
+				position: relative;
+				line-height: 100px;
+				text-align: center;
+			}
+			#_ul li div{
+				position: absolute;
+				top:100px;
+				width: 100%;
+				background-color: red;
+				height: 0;
+				filter: alpha(opacity = 0);
+				opacity: 0;
+				overflow: hidden;
+			}
+		</style>
+		<script src = 'startMove.js'></script>
+		<script>
+			window.onload = function(){
+				var oUl = document.getElementById('_ul');
+				var aLis = oUl.getElementsByTagName('li');
+				for(var i = 0; i < aLis.length; i++){
+					var oDiv = aLis[i].getElementsByTagName("div")[0];
+					oDiv.style.height = "auto";
+					oDiv.iHeight = oDiv.offsetHeight;
+					oDiv.style.height = '0px';
+					aLis[i].onmouseover = function(){
+						var node = this.getElementsByTagName('div')[0];
+						startMove(node, {
+							height:node.iHeight,
+							opacity:100
+						})
+					}
+					aLis[i].onmouseout = function(){
+						var node = this.getElementsByTagName("div")[0];
+						startMove(node, {
+							height:0,
+							opacity:0
+						})
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id = '_ul'>
+			<li >
+				公司简介 
+				<div>
+					hihalokjlk<br/>
+					kfadfjak<br/>
+
+				</div>
+			</li>
+			<li>
+				关于我们 
+				<div>
+					kalsdflk<br/>
+					kdfakd<br/>
+					kdsflkll<br/>
+				</div>
+			</li>
+			<li>
+				联系我们 
+				<div>
+					d;fkads<br/>
+					kjdslfj<br/>
+					ksdlfkd<br/>
+					fjlksdf<br/>
+				</div>
+				
+			</li>
+		</ul>
+	</body>
+</html>
