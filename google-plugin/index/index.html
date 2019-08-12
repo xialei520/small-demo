@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+	</head>
+	<body >
+		<div id="container">
+			<p class="text">二维码生成器</p>
+			<div class="address1">
+				<span>地址一: </span>
+				<input type="text" name="" id="" value="" v-model="url1" @keyup.enter="enter"/>
+			</div>
+			<div class="address2">
+				<span>地址二: </span>
+				<input type="text" name="" id="" value="" v-model="url2" @keyup.enter="enter"/>
+			</div>
+			<div class="address3">
+				<span>地址三: </span>
+				<input type="text" name="" id="" value="" v-model="url3" @keyup.enter="enter"/>
+			</div>
+			<p class="btn">
+				<a href="javascript:;" @click='generate'>生成QR图</a>
+			</p>
+			<div class="underline">
+				<div class="item1">
+					<span  >地址一</span>
+					<div id="qrcode1" ref='qrcode1'> </div>
+				</div>
+				<div class="item1">
+					<span  >地址二</span>
+					<div id="qrcode2" ref='qrcode2'> </div>
+				</div>
+				<div class="item1">
+					<span  >地址三</span>
+					<div id="qrcode3" ref='qrcode3'> </div>
+				</div>
+			</div>
+		</div>
+		<script src="qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="index.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

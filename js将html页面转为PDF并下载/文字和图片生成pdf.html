@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="js/toBase64.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jsPdf.debug.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			App.transfer('images/2c5c3b34bd.jpg', 'png',function(data){
+				console.log(data, 999)
+				//三个参数, 第一个是方向, 第二个是尺寸, 第三个尺寸格式
+				var doc = new jsPDF('landscape', 'pt', [205, 155]);
+				//将图片转化为dataUrl
+				var imageData = data;
+				//设置字体大小
+				doc.setFontSize(20);
+				//10, 20这两个参数控制文字距离左边, 与上边的距离
+				doc.text('95', 10, 20);
+				//0, 40, 控制文字距离左边, 与上边的距离
+				doc.addImage(imageData, 'PNG', 0, 40, 205, 115);
+				doc.save('girl.pdf')
+			})
+			
+			 
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #qrcode {
+            width: 180px;
+            height: 120px;
+            margin-top: 10px;
+			margin-bottom: 10px;
+			
+        }
+		#container{
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+		}
+		a{
+			text-decoration: none;
+		}
+    </style>
+	
+</head>
+
+<body>
+    
+	<div id="container">
+		<div id="qrcode"></div>
+		<div class='right'>
+			<p>
+				<span id="">当前地址: </span>
+				<input type="text" name="" id="txt" value="" />
+			</p>
+			<p><a href='http://www.loveinmymind.xyz'>生成多个二维码</a></p>
+		</div>
+	</div>
+	<script src="qrcode.min.js"></script>
+	<script src="popup.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

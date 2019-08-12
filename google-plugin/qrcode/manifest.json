@@ -1,0 +1,20 @@
+{
+"manifest_version": 2,
+
+"name": "Qrcode",
+"description": "Qrcode: The browser address will be dynamically generated two-dimensional code",
+"version": "1.0.0",
+"background": { "scripts": ["/background.js"] },
+"homepage_url": "https://www.xialei.store",
+"icons" : {
+    "128" : "/icon.jpg" ,
+    "16" : "/icon.jpg" ,
+    "48" : "/icon.jpg"
+  } ,
+"browser_action": {
+"default_icon": "icon.jpg",
+"default_popup": "popup.html",
+"default_title": "Qrcode"
+},
+"permissions": ["activeTab"]
+}

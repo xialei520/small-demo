@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#container{
+				width: 600px;
+				height: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			
+		</div>
+		<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=U5YBZ-SOTCW-S7RRH-OADKE-GUL67-HLBWR"></script>
+		<script type="text/javascript">
+			function init() {
+			    var map = new qq.maps.Map(document.getElementById("container"), {
+			        // 地图的中心地理坐标。
+			        center: new qq.maps.LatLng(39.916527,116.397128)
+			    });
+			}
+			init()
+		</script>
+
+	</body>
+</html>

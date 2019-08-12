@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no,viewport-fit=cover" name="viewport">
+
+	<style>
+		#container{
+			width: 100%;
+			height: 100%;
+		}
+	 	body{
+	 		height: auto;
+	 	}
+	</style>
+</head>
+<body style="overflow-x: hidden" >
+	<div id='container' class="test">
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+		<p>习近平向中央红军长征出发纪念碑敬献花篮，亲手整理花篮上的缎带，深深鞠躬。他动情地说，当年党和红军在长征途中一次次绝境重生，凭的是革命理想高于天，最后创造了难以置信的奇迹。</p>
+		<p>不禁让人想起三年前，习近平考察宁夏，从固原市六盘山机场一下飞机，就来到西吉县将台堡，参观红军长征会师纪念园、纪念馆，向纪念碑敬献花篮，向革命先烈三鞠躬。</p>
+	    <h2 class="toCanvas"> <a href="javascript:void(0);"> 转成canvas </a></h2>
+
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="html2canvas.min.js"></script>
+	<script type="text/javascript" src="canvas2image.js"></script>
+	<script>
+		(function waterMark(){
+			function textBecomeImg(text,fontsize,fontcolor, img){
+				var canvas = document.createElement('canvas');
+				 
+				var context = canvas.getContext('2d');
+				// context.clearRect(0, 0, canvas.width*2, canvas.height);
+				 
+				// var canvasWidth = canvas.width/99;
+				// 控制字体宽度
+				// canvasWidth = context.measureText(text).width;
+				canvas.width = 300;
+				canvas.height = 150;
+				context.fillStyle = fontcolor;
+				context.font=fontsize+"px Arial";
+				//设置文本基线
+				context.textBaseline = 'middle'; 
+				context.drawImage(img, 10, 	0, 100, 100);    
+				context.fillText(text,100,50);
+				var dataUrl = canvas.toDataURL('image/png');
+				return dataUrl;
+			}
+			// var text = DateUtil.getDate(new Date())+currentUserName;
+			var shuiyinDiv = document.createElement('div');
+			var style = shuiyinDiv.style;
+			style.position = 'absolute';
+			style.left = '-50%';
+			style.top = '-60%';
+			style.width = '200%';
+			style.height = '200%';
+			style.opacity = '.1';
+			style.overflowX = 'hidden'
+			 //创建新的图片对象
+		    var img = new Image();
+		     //指定图片的URL
+		    img.src = "./logo.png"+ "?v=" + new Date().getTime();
+		    img.setAttribute('crossOrigin', 'anonymous');
+		     //浏览器加载图片完毕后再绘制图片
+		    img.onload = function(){
+		    	
+		         //以Canvas画布上的坐标(10,10)为起始点，绘制图像
+		         //图像的宽度和高度分别缩放到350px和100px
+		          
+		          
+		        style.background = "url("+textBecomeImg('青岛银行',30,"red", img)+")";
+				style.zIndex = 9999999991;
+				style.transform = "rotate(-30deg)";
+				style.pointerEvents = "none";
+				
+				// document.body.appendChild(shuiyinDiv);    
+				document.getElementById('container').appendChild(shuiyinDiv)
+		    };
+		    
+						
+		})();
+ 		
+ 		 
+	</script>
+	<script type="text/javascript">
+	    var test = $(".test").get(0); //将jQuery对象转换为dom对象
+	    // 点击转成canvas
+	    $('.toCanvas').click(function(e) {
+	        // 调用html2canvas插件
+	        html2canvas(test, {
+	        	scale: 1, //缩放比例
+	        	height: $('body').outerHeight,
+	        	width: $('body').outerWidth
+	        }).then(function(canvas) {
+	            var canvasWidth = canvas.width;
+	            var canvasHeight = canvas.height;
+	           
+                Canvas2Image.saveAsImage(canvas, canvasWidth, canvasHeight, 'png');
+         
+
+	        });
+	    });
+	</script>
+</body>
+</html>

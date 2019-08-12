@@ -1,0 +1,77 @@
+body, html{
+	background: #EEEEEE;
+	padding:0;
+	margin: 0;
+}
+#container{
+	background: #fff;
+	width: 60%;
+	height: 50%;
+	margin: 0 auto;
+}
+.text{
+	font-size: 20px;
+	border-bottom: 2px solid #ddd;
+	padding: 10px 20px 30px;
+}
+.address1, .address2, .address3{
+	width: 80%;
+	height: 50px;
+	margin-left: 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+input{
+	margin-left: 20px;
+	border: none;
+	outline: none;
+
+	border-bottom: 1px solid #ddd;
+	width: 80%;
+	font-size: 20px;
+}
+.btn{
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20px;
+	 
+}
+.btn a{
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #5CB85C;
+	color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+}
+.underline{
+	margin: 0 auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+
+	border-top: 1px solid #ddd;
+	width: 90%;
+	height: auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.underline .item1{
+	width: 200px;
+	height: 250px;
+	/* border: 1px solid red; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+#qrcode1, #qrcode2, #qrcode3{
+	width: 120px;
+	height: 120px;
+	/* border: 1px solid green; */
+	margin-top: 30px;
+}
