@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			#ul1{
+				/*background: orange;*/
+				/*position: relative;*/
+			}
+			#ul1 li{
+				width: 200px;
+				height: 100px;
+				background: red;
+				position: relative;
+				float: left;
+				list-style: none;
+				font-size: 30px;
+				text-align: center;
+				line-height: 100px;
+			}
+			#ul1 li div{
+				position: absolute;
+				background: orange;
+				top:100px;
+				width: 100%;
+				font-size: 15px;
+				opacity: 0;
+				overflow: hidden;
+				/*height: 0;*/
+				filter: alpha(opacity = 0);
+			}
+		</style>
+		<script src = "startMove.js"></script>
+		<script>
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var aLis = oUl.getElementsByTagName('li');
+			for(var i = 0; i < aLis.length; i++){
+				var aDivs = aLis[i].getElementsByTagName('div')[0];
+				aDivs.style.height = "auto";
+				aDivs.iHeight = aDivs.offsetHeight;
+
+				aDivs.style.height = "0px";
+				aLis[i].onmouseover = function(){
+					var node = this.getElementsByTagName('div')[0];
+
+					startMove(node, {
+						height:node.iHeight,
+						opacity:100
+					})
+				}
+				aLis[i].onmouseout = function(){
+					var node = this.getElementsByTagName('div')[0];
+
+					startMove(node, {
+						height:0,
+						opacity:0
+					})
+				}
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<ul id = "ul1">
+			<li>
+				首页
+				<div>
+					框架江东父老开始<br/>
+					了伐啦开始的
+				</div>
+			</li>
+			<li>
+				服务
+				<div>
+					快递反馈减肥啦卷发<br/>
+					京东方开发<br/>
+					会计分录看
+				</div>
+			</li>
+			<li>
+				联系我们
+				<div>
+					开房记录开始的<br/>
+					jflaksjflksd<br/>
+					kdfjjfkd<br/>
+					jfksfjlk
+				</div>
+			</li>
+			<li>
+				投诉与建议
+				<div>
+					九分裤大姐夫<br/>
+					kjflkasd<br/>
+					jfaksdj <br/>
+					fkjdflk
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>

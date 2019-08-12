@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#div1{
+				width: 66px;
+				height: 80px;
+				position: absolute;
+				left: 600px;
+				top:600px;
+				background:url(image/我的飞机.gif) no-repeat;
+			}
+			body{background: url(image/background_1.png);}
+			#clip div{
+				background:url(image/bullet1.png) no-repeat;
+				position: absolute;
+				width: 6px;
+				height: 14px;
+				left: 50px;
+				top: 50px;
+			 }
+		</style>
+
+		<script src = "tool.js"></script>
+		<script>
+		window.onload = function(){
+			var oDiv = document.getElementById("div1");
+			var oClip = document.getElementById('clip');
+			var bullet = oClip.getElementsByTagName('div');
+			drag(oDiv);
+			//定义子弹都为未发射状态
+			for(var i = 0; i < bullet.length; i++){
+				bullet[i].isrunning = false;
+			}
+
+			setInterval(function(){
+				var node = load(bullet);
+				fire(oDiv, node);
+			}, 1000);
+		}
+
+		//找出未发射的子弹
+		function load(bullet){
+			for(var i = 0; i < bullet.length; i++){
+				if(!bullet[i].isrunning){
+					return bullet[i];
+				}
+			}
+		}
+
+		//确定发射子弹的位置
+		function fire(oDiv, bullet){
+			bullet.isrunning = true;
+			var x = oDiv.offsetLeft + oDiv.offsetWidth / 2 - bullet.offsetWidth / 2;
+			var y = oDiv.offsetTop - bullet.offsetHeight - 2;
+			bullet.style.left = x + "px";
+			bullet.style.top = y + "px";
+			startMove(bullet, 0);
+		}
+
+		//发射过程
+		var timer = null;
+		function startMove(obj, iTarget){
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				var speed = 0;
+				if(obj.offsetTop > iTarget){
+					speed = -5;
+				}else{
+					speed = 5;
+				}
+
+				if(Math.abs(obj.offsetTop - iTarget) < Math.abs(speed)){
+					clearInterval(timer);
+					obj.style.top = iTarget + "px";
+				}else{
+					obj.style.top = obj.offsetTop + speed + "px";
+				}
+			}, 20);
+
+		}
+		</script>
+	</head>
+	<body>
+		<div id = "div1"></div>
+		<div id = "clip">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</body>
+</html>

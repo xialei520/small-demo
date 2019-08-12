@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+		#puzzle{
+			width: 300px;
+			height: 300px;
+			background-color: gray;
+			border: 1px solid black;
+			margin: 100px auto;
+			position: relative;
+		}
+		#puzzle div{
+			width: 98px;
+			height: 98px;
+			border: 1px solid white;
+			background-color: red;
+			float: left;
+			text-align: center;
+			line-height: 98px;
+			font-size: 30px;
+			z-index: 2;
+
+		}
+		</style>
+		<script src = "tool.js"></script>
+		<script>
+		window.onload = function(){
+			var oPuzzle = document.getElementById("puzzle");
+
+			createPuzzle(9, oPuzzle)
+		}
+
+
+		var currentIndex = 2;
+
+		//添加拼图
+		function createPuzzle(n, node){
+			for(var i = 0; i < n; i++){
+				var oDiv = document.createElement("div");
+				oDiv.id = i;
+				oDiv.innerHTML = i + 1;
+				oDiv.style.backgroundColor = randomColor();
+				node.appendChild(oDiv);
+				//将每一个div都可以被拖拽
+				dragBack(oDiv);
+			}
+
+			var nodes = $("#puzzle").getElementsByTagName("div");
+			//将所有拼图从相对定位，变成绝对定位
+			for(var i = 0; i < nodes.length; i++){
+				nodes[i].style.left = nodes[i].offsetLeft + "px";
+				nodes[i].style.top = nodes[i].offsetTop + "px";
+			}
+
+			for(var i = 0; i < nodes.length; i++){
+				nodes[i].style.position = "absolute";
+			}
+		}
+
+		/*
+			当两个块间的距离小于30的时候，交换两个块的位置。
+		*/
+
+		function dragBack(obj){
+			var offsetX = 0;
+			var offsetY = 0; //记录相对位置
+			
+			obj.onmousedown = function(ev){
+				var e = ev || window.event;
+				offsetX = e.clientX - this.offsetLeft;
+				offsetY = e.clientY - this.offsetTop;
+				var arr = []; //存储坐标
+				//记录坐标
+				arr.push({
+					l: obj.offsetLeft + "px",
+					t: obj.offsetTop + "px"
+				})
+
+				obj.style.zIndex = ++currentIndex;
+
+				document.onmousemove = function(ev){
+					var e = ev || window.event;
+					obj.style.left = e.clientX - offsetX + "px";
+					obj.style.top = e.clientY - offsetY + "px";
+
+					//记录坐标
+					arr.push({
+						l: obj.offsetLeft + "px",
+						t: obj.offsetTop + "px"
+					})
+				}
+
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					//原路返回，收集走过的坐标
+					var timer = setInterval(function(){
+						var frame = arr.pop();
+						if(frame){
+							obj.style.left = frame.l;
+							obj.style.top = frame.t;
+							/*
+								判断obj和其他所有的块圆心是否小于30
+							*/
+							var aDivs = $("#puzzle").getElementsByTagName("div");
+							for(var i = 0; i < aDivs.length; i++){	
+								if(aDivs[i] != obj && dist(obj, aDivs[i])){
+									//交换两个块的位置
+									clearInterval(timer);
+									var tmp = {
+										x: aDivs[i].offsetLeft,
+										y: aDivs[i].offsetTop
+									}
+
+									aDivs[i].style.left = arr[0].l;
+									aDivs[i].style.top = arr[0].t;
+
+									obj.style.left = tmp.x + "px";
+									obj.style.top = tmp.y + "px";
+								}
+							}
+
+
+						}else{
+							clearInterval(timer);
+						}
+					}, 20);
+				}
+			}
+		}
+
+		function dist(node1, node2){
+			var x1 = node1.offsetLeft + node1.offsetWidth / 2;
+			var y1 = node1.offsetTop + node1.offsetHeight / 2;
+
+			var x2 = node2.offsetLeft + node2.offsetWidth / 2;
+			var y2 = node2.offsetTop + node2.offsetHeight / 2;
+
+			var d = Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+			if(d < 30){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		</script>
+	</head>
+	<body>
+		<div id = "puzzle">
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+

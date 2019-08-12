@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			*{margin:0;padding: 0;}
+			#div1{
+				width: 636px;
+				height: 352px;
+				background-color: #eeeeee;
+				margin:100px auto; 
+			}
+			#div2{
+				width: 600px;
+				margin-top: 12px;
+				
+				margin:0 auto;
+			}
+			#div3{
+				width: 600px;
+				height: 124px;
+				font-size: 20px;
+			}
+			#_ul{
+				width: 600px;
+				margin-top: 10px;
+
+			}
+			#_ul li{
+				width: 606px;
+				height: 36px;
+				margin-bottom: 6px;
+				/*background-color:white;*/
+				list-style: none;
+			}
+			#_ul li:nth-of-type(1) button{
+				height: 36px;
+				width: 36px;
+				background-color: #ffcc00;
+				display: inline-block;
+				line-height: 36px;
+				text-align: center;
+				float: left;
+				margin-right: 6px;
+				border-radius: 4px;
+			}
+			#_ul li button:nth-of-type(14){width: 60px;margin-right: 0;}
+			#_ul li:nth-of-type(2) button{
+				height: 36px;
+				width: 36px;
+				background-color: #ffcc00;
+				display: inline-block;
+				line-height: 36px;
+				text-align: center;
+				float: left;
+				margin-right: 6px;
+				border-radius: 4px;
+			}
+			#_ul li:nth-of-type(2) button:nth-of-type(1){width: 60px; }
+			#_ul li:nth-of-type(2) button:nth-of-type(14){margin-right: 0; }
+			#_ul li:nth-of-type(3) button{
+				height: 36px;
+				width: 36px;
+				background-color: #ffcc00;
+				display: inline-block;
+				line-height: 36px;
+				text-align: center;
+				float: left;
+				margin-right: 6px;
+				border-radius: 4px;
+			}
+			#_ul li:nth-of-type(3) button:nth-of-type(1){
+				width: 70px;
+			}
+			#_ul li:nth-of-type(3) button:nth-of-type(13){
+				width: 68px;
+				margin-right: 0;
+			}
+			#_ul li:nth-of-type(4) button{
+				height: 36px;
+				width: 36px;
+				background-color: #ffcc00;
+				display: inline-block;
+				line-height: 36px;
+				text-align: center;
+				float: left;
+				margin-right: 6px;
+				border-radius: 4px;
+			}
+			#_ul li:nth-of-type(4) button:nth-of-type(1){
+				width: 84px;
+			}
+			#_ul li:nth-of-type(4) button:nth-of-type(12){
+				width: 96px;
+				margin-right: 0;
+			}
+			#_ul li:nth-of-type(5) button{
+				height: 36px;
+				width: 606px;
+				background-color: #ffcc00;
+				display: inline-block;
+				 
+				border-radius: 4px;
+			}
+		</style>
+		<script src = "tools.js"></script>
+		<script>
+		window.onload = function(){
+			var oDiv3 = document.getElementById("div3"); 
+			/*var oUl = document.getElementById('_ul');
+			var oLi = oUl.getElementsByTagName('li');*/
+			var obtn = document.getElementsByTagName("button");
+			var arr = [];
+			 for(var i = 0; i < obtn.length; i++){
+				obtn[i].onclick = function(){
+				 	if(!(this.innerHTML == "delete")){
+				 		arr.push(this.innerHTML);
+				 		oDiv3.value = arr.join("");
+				 		}else{
+				 		arr.splice(arr.length - 1, 1);
+				 		oDiv3.value = arr.join("");
+				 		}
+				}
+				 
+				}
+				
+			 	
+			 
+			 document.keydown = function(ev){
+					var e = ev || window.event;
+					alert(e.keyCode);
+					var newArr = String.fromCharCode(e.keyCode);
+					alert(newArr);
+					arr.push(newArr);
+					oDiv3.value = arr.join("");
+				}
+			
+
+		}
+		</script>
+	</head>
+	<body>
+		<div id = "div1">
+			<div id = "div2">
+				<textarea name="" id="div3" cols="30" rows="6"></textarea>
+				<ul id = "_ul">
+					<li>
+						<button>`</button> 
+						<button>1</button>
+						<button>2</button>
+						<button>3</button>
+						<button>4</button>
+						<button>5</button>
+						<button>6</button>
+						<button>7</button>
+						<button>8</button>
+						<button>9</button>
+						<button>0</button>
+						<button>-</button>
+						<button>=</button>
+						<button id = "">delete</button>
+					</li>
+					<li>
+						<button>tab</button> 
+						<button>q</button>
+						<button>w</button>
+						<button>e</button>
+						<button>r</button>
+						<button>t</button>
+						<button>y</button>
+						<button>u</button>
+						<button>i</button>
+						<button>o</button>
+						<button>p</button>
+						<button>[</button>
+						<button>]</button>
+						<button id = "">\</button>
+					</li>
+					<li>
+						<button>caps lock</button> 
+						<button>a</button>
+						<button>s</button>
+						<button>d</button>
+						<button>f</button>
+						<button>g</button>
+						<button>h</button>
+						<button>j</button>
+						<button>k</button>
+						<button>l</button>
+						<button>;</button>
+						<button>'</button>
+						<button>enter</button>
+					</li>
+					<li>
+						<button>shift</button>
+						<button>z</button>
+						<button>x</button>
+						<button>c</button>
+						<button>v</button>
+						<button>b</button>
+						<button>n</button>
+						<button>m</button>
+						<button>,</button>
+						<button>.</button>
+						<button>/</button>
+						<button>shift</button>
+					</li>
+					<li>
+						<button></button>
+						
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
