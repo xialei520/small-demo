@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset=utf-8" /> 
+<title></title>
+<style>
+video {
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 0 20px 0;
+    float:left;
+}
+canvas {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    display: block;
+}
+</style>
+</head>
+<body>
+<video width="640" height="480" id="myVideo"></video>
+<canvas width="640" height="480" id="myCanvas"></canvas>
+<button id="myButton">截图</button>
+<button id="myButton2">预览</button>
+<button id="myButton3">
+<a download="video.png">另存为</a>
+</button>
+</body>
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+var cobj=document.getElementById('myCanvas').getContext('2d');
+var vobj=document.getElementById('myVideo');
+getUserMedia({video:true},function(stream){
+vobj.src=stream;
+vobj.play();
+},function(){});
+document.getElementById('myButton').addEventListener('click',function(){
+cobj.drawImage(vobj,0,0,640,480);
+document.getElementById('myButton3').children[0].href=cobj.canvas.toDataURL("image/png");
+},false);
+document.getElementById('myButton2').addEventListener('click',function(){
+window.open(cobj.canvas.toDataURL("image/png"),'_blank');
+},false);
+},false);
+function getUserMedia(obj,success,error){
+if(navigator.getUserMedia){
+getUserMedia=function(obj,success,error){
+navigator.getUserMedia(obj,function(stream){
+success(stream);
+},error);
+}
+}else if(navigator.webkitGetUserMedia){
+getUserMedia=function(obj,success,error){
+navigator.webkitGetUserMedia(obj,function(stream){
+var _URL=window.URL || window.webkitURL;
+success(_URL.createObjectURL(stream));
+},error);
+}
+}else if(navigator.mozGetUserMedia){
+getUserMedia=function(obj,success,error){
+navigator.mozGetUserMedia(obj,function(stream){
+success(window.URL.createObjectURL(stream));
+},error);
+}
+}else{
+return false;
+}
+return getUserMedia(obj,success,error);
+}
+</script>
+</html>
+--------------------- 
+作者：细水长流- 
+来源：CSDN 
+原文：https://blog.csdn.net/qq_33220449/article/details/52733956 
+版权声明：本文为博主原创文章，转载请附上博文链接！

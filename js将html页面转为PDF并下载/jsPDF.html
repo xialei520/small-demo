@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<img id="pic" src="../../Nodejs/16.blog/www/images/1.jpg" >
+		<script src="js/jsPdf.debug.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var doc = new jsPDF('landscape', 'pt', [205, 115]);
+			var Img = document.getElementById('pic');
+			var imageData = getImageBase64(Img, 'png');
+			doc.addImage(imageData, 'PNG', 0, 0, 205, 115);
+			doc.save('a4.pdf');
+			
+			
+			
+			
+			
+			function getImageBase64(img, ext, callback) {
+				var canvas = document.createElement('canvas');
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(img, 0, 0, img.width, img.height);
+				var dataUrl = canvas.toDataURL('image/' + ext);
+				canvas = null;
+				callback && callback(dataUrl)
+				return dataUrl;
+			}
+		</script>
+	</body>
+</html>

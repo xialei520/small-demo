@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<img id='icon'>
+		<img id="image">
+		<script src="Native.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var use_icon = document.getElementById('icon');
+			use_icon.src = '../lazyload/timg.gif';
+			use_icon.onload = () => {
+				getImageBase64(use_icon, 'jpeg', (dataURL) => {
+					console.log(dataURL, 123)
+					
+					// base64转为图片
+					let file =  dataURL; // 把整个base64给file
+					let name = "自定义文件名字" + ".png"; // 定义文件名字（例如：abc.png ， cover.png）
+					var type = "image/png"; // 定义图片类型（canvas转的图片一般都是png，也可以指定其他类型）
+					let conversions = base64ToBlob(file, type); // 调用base64转图片方法
+					console.log(conversions)
+					let newImg = document.getElementById('image');
+					newImg.src = conversions;
+					newImg.style.border = '1px solid red'
+				})
+
+			}
+
+			function getImageBase64(img, ext, callback) {
+				var canvas = document.createElement('canvas');
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(img, 0, 0, img.width, img.height);
+				var dataUrl = canvas.toDataURL('image/' + ext);
+				canvas = null;
+				callback && callback(dataUrl)
+				// return dataUrl;
+			}
+
+			
+
+			function base64ToBlob(urlData, type) {
+				let arr = urlData.split(',');
+				let mime = arr[0].match(/:(.*?);/)[1] || type;
+				// 去掉url的头，并转化为byte
+				let bytes = window.atob(arr[1]);
+				// 处理异常,将ascii码小于0的转换为大于0
+				let ab = new ArrayBuffer(bytes.length);
+				// 生成视图（直接针对内存）：8位无符号整数，长度1个字节
+				let ia = new Uint8Array(ab);
+				for (let i = 0; i < bytes.length; i++) {
+					ia[i] = bytes.charCodeAt(i);
+				}
+				return new Blob([ab], {
+					type: mime
+				});
+			}
+		</script>
+	</body>
+</html>

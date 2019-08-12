@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id='myCanvas'></canvas>
+	<script>
+		//获取Canvas对象(画布)
+  var canvas = document.getElementById("myCanvas");
+  //简单地检测当前浏览器是否支持Canvas对象，以免在一些不支持html5的浏览器中提示语法错误
+ if(canvas.getContext){  
+      //获取对应的CanvasRenderingContext2D对象(画笔)
+      var ctx = canvas.getContext("2d");
+     
+      //创建新的图片对象
+     var img = new Image();
+     //指定图片的URL
+     img.src = "logo.png";
+     //浏览器加载图片完毕后再绘制图片
+     img.onload = function(){
+         //以Canvas画布上的坐标(10,10)为起始点，绘制图像
+         //图像的宽度和高度分别缩放到350px和100px
+         ctx.drawImage(img, 10, 10, 50, 50);      
+         ctx.fillText('青岛银行',100,50);       
+     };
+ }
+	</script>
+</body>
+</html>
