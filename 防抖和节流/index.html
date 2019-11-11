@@ -13,20 +13,28 @@
     <script>
         var i = 0;
         document.getElementById('btn').onclick = () => {
-            debounce(console.log(i++), 30000)
+            debounce(fn, 1000, false)()
+
         }
-        var debounce = function (fn, delayTime) {
-                var timeId;
-                return function () {
-                    var context = this, args = arguments;
-                    timeId && clearTimeout(timeout);
-                    timeId = setTimeout(function (){
-                            fn.apply(context, args);
-                        }, delayTime)
-
+        //防抖动函数
+        function debounce(fn,wait=50, immediate){
+            let timer;
+            console.log(timer, 34)
+            console.log(arguments)
+            return function () {
+                if(immediate){
+                    fn.apply(this, arguments);
                 }
-
+                console.log(timer, 'll')
+                if(timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments)
+                }, wait)
             }
+        }
+        function fn() {
+            console.log('l')
+        }
     </script>
 </body>
 
