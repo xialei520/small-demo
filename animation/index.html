@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.example {
+				width: 500px;
+				height: 500px;
+
+				margin: 0 auto;
+				margin-top: 200px;
+				position: relative;
+
+
+			}
+
+			.example:after,
+			.example:before {
+				content: '';
+				position: absolute;
+				width: 0px;
+				height: 0px;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgb(71, 71, 71);
+				margin: auto;
+				border-radius: 50%;
+				animation: name 1s linear infinite;
+
+			}
+
+			.example:after {
+				animation-delay: 0.5s;
+			}
+
+			@keyframes name {
+
+				from {
+					width: 0px;
+					height: 0px;
+					opacity: 1;
+				}
+
+				to {
+					width: 300px;
+					height: 300px;
+					opacity: 0;
+				}
+			}
+			.sj {
+			    width: 0; 
+			    height: 0;
+			    border-width: 100px;
+			    border-style: solid;
+			}
+			
+			.sj-left {
+			    border-color: transparent pink transparent transparent;
+			}
+			
+			.sj-right {
+			    border-color: transparent transparent transparent pink;
+			}
+			
+			.sj-top {
+			    border-color: transparent transparent pink transparent;
+			}
+			
+			.sj-bottom {
+			    border-color: pink transparent transparent transparent;
+			}
+ 
+			 
+
+		</style>
+	</head>
+	<body>
+		<div class="example">
+
+		</div>
+		<div class="sj sj-left">
+			 
+		</div>
+		<div class="sj sj-top">
+			 
+		</div>
+	</body>
+</html>
