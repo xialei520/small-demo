@@ -6,35 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+	<style type="text/css">
+		#content{
+			width: 300px;
+			height: 300px;
+			background: #008000;
+			text-align: center;
+			line-height: 300px;
+			font-size: 30px;
+		}
+	</style>
 </head>
 
 <body>
-    <button id="btn">点击</button>
+    <div id="content"></div>
     <script>
-        var i = 0;
-        document.getElementById('btn').onclick = () => {
-            debounce(fn, 1000, false)()
-
-        }
-        //防抖动函数
-        function debounce(fn,wait=50, immediate){
-            let timer;
-            console.log(timer, 34)
-            console.log(arguments)
-            return function () {
-                if(immediate){
-                    fn.apply(this, arguments);
-                }
-                console.log(timer, 'll')
-                if(timer) clearTimeout(timer);
-                timer = setTimeout(() => {
-                    fn.apply(this, arguments)
-                }, wait)
-            }
-        }
-        function fn() {
-            console.log('l')
-        }
+		let i = 0;
+        let oDiv = document.getElementById('content');
+		function count(){
+			oDiv.innerHTML = i++;
+		}
+		oDiv.onmousemove =  _throttle(count, 1000) ;
+		//非立即执行版---> 防抖
+		function debounce(func, wait){
+			let time = null;
+			return function(){
+				let context = this;
+				let args = arguments;
+			 
+				if(time) clearTimeout(time);
+				time = setTimeout(() => {
+					func.apply(context, args)
+				}, wait)
+			}
+		}
+		//立即执行版 ---> 防抖
+		function _debounce(func, wait){
+			let time;
+			return function(){
+				let context  = this;
+				let args = arguments;
+				if(time) clearTimeout(time);
+				let callNow = !time;
+				time = setTimeout(() => {
+					time = null;
+				}, wait)
+				if(callNow) func.apply(context, args);
+			}
+		}
+		// 时间戳版 ---> 节流
+		function throttle(func, wait){
+			let previous = 0;
+			return function(){
+				let args = arguments;
+				let context = this;
+				let now = new Date();
+				if(now - previous > wait){
+					func.apply(context, args);
+					previous = now;
+				}
+			}
+		}
+		//定时器版 ---> 节流
+		function _throttle(func, wait) {
+		    let timeout;
+		    return function() {
+		        let context = this;
+		        let args = arguments;
+		        if (!timeout) {
+		            timeout = setTimeout(() => {
+		                timeout = null;
+		                func.apply(context, args)
+		            }, wait)
+		        }
+		
+		    }
+		}
+		 
     </script>
 </body>
 
