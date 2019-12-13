@@ -43,7 +43,7 @@ server.on('request', (req, res) => {
 // console.log(process.stdin)
 //进程名称
 process.title = '你电话'
-// console.log(process)
+console.log( process.cwd())
 server.listen(port, '127.0.0.1', () => {
 	console.log(`server is running at http://127.0.0.1:${port}`)
 })
