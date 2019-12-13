@@ -24,7 +24,18 @@
 // let s: number = undefined;
 // let o: number | string | undefined = 'undefined';
 
-function start(){
-	console.log('123')
-}
- 
+// function start(){
+// 	console.log('123')
+// }
+/*
+
+*/
+// let x:[string, number];
+// x = ['Runoob', 1];
+// // x = [1, 'Runoob'];
+// console.log(x[1]);
+
+//枚举类型
+enum Color {Red, Green, Blue};
+let c: Color = Color.Blue;
+console.log(c)
