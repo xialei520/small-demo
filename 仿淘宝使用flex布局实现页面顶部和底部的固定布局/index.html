@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 14px;
+        }
+        .HolyGrail {
+            display: -webkit-flex;
+            display: flex;
+            min-height: 100px;
+            flex-direction: column;
+        }
+
+        header,
+        footer {
+            text-align: center;
+            /* flex: 1;设置为1则顶体尾平分body */
+            height: 50px;
+            background: #ccc;
+        }
+
+        .HolyGrail-body {
+            display: -webkit-flex;
+            display: flex;
+            flex: 1;
+        }
+
+        .HolyGrail-content {
+            flex: 1;
+            background: pink;
+        }
+
+        .HolyGrail-nav, .HolyGrail-ads {
+            /* 两个边栏的宽度不放大也不缩小设为固定2em */
+            flex: 0 0 2em;
+        }
+
+        .HolyGrail-nav {
+            /* 导航放到最左边 */
+            order: -1;
+        }
+        /* @media (max-width: 768px) {
+          .HolyGrail-body {
+            flex-direction: column;
+            flex: 1;
+          }
+          .HolyGrail-nav,
+          .HolyGrail-ads,
+          .HolyGrail-content {
+            flex: auto;
+          }
+        } */
+        .Site {
+          display: -webkit-flex;
+          display: flex;
+          min-height: 100vh;/*1vh表示浏览器高度的1%，100vh为浏览器高度，感觉这个挺好的*/
+          /* min-height: 100%;另一种写法 */
+          flex-direction: column;
+        }
+
+        .Site-content {
+          flex: 1;
+          overflow-y: scroll;
+          background: #0099ff;
+        }
+    </style>
+</head>
+<body class="Site">
+    <header>爱淘宝</header>
+    <div class="HolyGrail-body Site-content">
+        <main class="HolyGrail-content" style="height: 1000px;">...</main>
+        <nav class="HolyGrail-nav">123</nav>
+        <aside class="HolyGrail-ads">456</aside>
+    </div>
+    <footer>淘宝底部</footer>
+</body>
+</html>

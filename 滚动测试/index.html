@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+					recalc = function() {
+						var clientWidth = docEl.clientWidth;
+						docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+					};
+				if (!doc.addEventListener) {
+					return;
+				}
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+				recalc();
+			})(document, window);
+		</script>
+		<style type="text/css">
+			p,
+			ul,
+			li,
+			html,
+			body {
+				padding: 0;
+				margin: 0;
+				font-size: 20px;
+			}
+
+			body,
+			html {
+				height: 100%;
+				width: 100%;
+			}
+
+			body {}
+
+			li {
+				list-style: none;
+				flex: 1;
+				font-size: 20px;
+			}
+
+			li:first-child {
+				border: 1px solid red;
+				background: green;
+			}
+
+			li:nth-child(2) {
+				border: 1px solid pink;
+				background: blue;
+			}
+
+			li:last-child {
+				border: 1px solid orange;
+				background: peru;
+			}
+
+			#container {
+				flex: 1;
+				width: 100%;
+				height: 100%;
+				/* margin-top: 50px; */
+				overflow-y: scroll;
+				padding-bottom: 600px;
+				/* --webkit-overflow-scrolling: touch; */
+			}
+
+			ul {
+				width: 100%;
+				height: 50px;
+				display: flex;
+			}
+
+			#test1,
+			#test2,
+			#test3 {
+				width: 100%;
+				height: 100px;
+				border: 1px solid #000;
+			}
+
+			.nav {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+			}
+
+			#amount {
+				width: 100%;
+				height: 150px;
+				border: 1px solid red;
+				text-align: center;
+				line-height: 150px;
+			}
+
+			header {
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+			}
+
+			header h1 {
+				font-size: 20px;
+			}
+
+			.sit {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
+
+			#item, #newItem {
+				display: flex;
+				height: 50px;
+				background: #008000;
+			}
+
+			#item p, #newItem p {
+				flex: 1;
+				text-align: center;
+				line-height: 50px;
+			}
+			header{
+				background: green;
+			}
+		</style>
+	</head>
+	<body class="sit">
+		<header>
+			<h1>返回</h1>
+			<h1>账户总览</h1>
+			<h1>首页</h1>
+		</header>
+		<div id="container">
+			<!-- <ul class="nav">
+			<li id="demo1">111</li>
+			<li id="demo2">222</li>
+			<li id="demo3">333</li>
+		</ul> -->
+			<div id="amount">
+				￥10000
+			</div>
+			<div id="item">
+				<p  >活期</p>
+				<p  >定期</p>
+				<p  >基金</p>
+			</div>
+			<div id="test1">
+				活期
+			</div>
+
+			<div id="test2">
+				定期
+			</div>
+
+			<div id="test3">
+				基金
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 获取滚动高度
+			//element.scrollTop  距离整个文档的距离
+			//element.getBoundingClientRect().top  距离可视区域顶部距离
+			var test1 = document.getElementById('test1');
+			var test2 = document.getElementById('test2');
+			var test3 = document.getElementById('test3');
+			 
+			console.log(test1, test2, test3)
+
+			var container = document.getElementById('container');
+			
+			var	item = document.getElementById('item');
+			addEventListenerClick(item);
+			 
+		 
+			container.addEventListener('scroll', function() {
+				console.log("移动端可以实现")
+				// console.log(container.scrollTop);
+				// let scrollTop = document.documentElement.scrollTop ||document.body.scrollTop;
+				let scrollTop = container.scrollTop;
+				const item = document.getElementById('item');
+				const amount = document.getElementById('amount');
+				const header = document.getElementsByTagName('header')[0];
+				// header.style.opacity = 1;
+				if (scrollTop >= 0 && (item.offsetTop - 50)) {
+					header.style.opacity = scrollTop / (item.offsetTop - 50);
+				} else {
+					header.style.opacity = 1;
+				}
+
+				if (scrollTop > item.offsetTop - 50) {
+					console.log(123)
+					var newItem2 = document.getElementById('newItem');
+					if(!newItem2){
+						const newItem = cloneDiv(item);
+						newItem.id= 'newItem';
+						newItem.style.position = 'fixed';
+						newItem.style.top = '50px';
+						newItem.style.left = '0';
+						newItem.style.right = '0';
+						newItem.style.zIndex= 10;
+						newItem.style.background = 'yellow';
+						document.body.appendChild(newItem);
+						var item2 = document.getElementById('newItem');
+						addEventListenerClick(item2);
+					}
+					
+				}
+				if (scrollTop < test1.offsetTop - 100) {
+					// item.style.position = 'static'
+					var newItem2 = document.getElementById('newItem');
+					if(newItem2){
+						// console.log(newItem2);
+						document.body.removeChild(newItem2);
+					}
+					
+					 
+				}
+
+			})
+			function cloneDiv(dom){
+				return dom.cloneNode(true)
+			}
+			function addEventListenerClick(dom){
+				dom.addEventListener('click', e => {
+					console.log(e.target.nodeName)
+					if(e.target && e.target.nodeName.toLowerCase() == 'p'){
+						console.log(e.target.innerHTML)
+						if(e.target.innerHTML == '活期'){
+						 
+							let distance = test1.offsetTop;
+							container.scrollTo({
+								top: distance - 100,
+								behavior: 'smooth'
+							})
+						}
+						if(e.target.innerHTML == '定期'){
+							let distance = test2.offsetTop;
+							container.scrollTo({
+								top: distance - 100,
+								behavior: 'smooth'
+							})
+						}
+						if(e.target.innerHTML == '基金'){
+							let distance = test3.offsetTop;
+							container.scrollTo({
+								top: distance - 100,
+								behavior: 'smooth'
+							})
+						}
+					}
+				},false)
+			}
+		</script>
+	</body>
+</html>
