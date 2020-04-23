@@ -4,7 +4,8 @@
   "description": "",
   "main": "ora.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init-page": "node init-page.js -p"
   },
   "author": "xialei",
   "license": "ISC",
