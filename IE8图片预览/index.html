@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="preview" style="width: 200px; height: 200px;"></div>
+		<img id="img" src="" style="width=500; height=500"/>
+		<input type="file" id="file_upl" onchange="ieBase64(this)">
+		<script>
+			function imgPreview(file) {
+			    var prevDiv = document.getElementById('preview');
+			
+			    // if (file.files && file.files[0])
+			    // {
+			    //     var reader = new FileReader();
+			    //     reader.onload = function(evt){
+			    //         prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+			    //     }
+			    //     reader.readAsDataURL(file.files[0]);
+			    // } else
+			    // {
+			var file_upl = document.getElementById('file_upl');
+			  //       file_upl.select();
+					// file_upl.blur();
+			  //       var realpath = document.selection.createRange().text;
+					// console.log(realpath, 123);
+					//  var img = document.getElementById('img');
+					//  // file_upl.blur();
+					//  img.src = realpath
+			        prevDiv.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale';); width: 200px;height:200px";
+					 prevDiv.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = 'E:\Learning\small-demo\IE8图片预览\images\1.jpg';
+					 
+							 
+				 
+			    // }
+			}
+			//ie转换方法canvas转base64
+			      function ieBase64(file){//file是input type="file" 对象dom
+			            var realPath, xmlHttp, xml_dom, tmpNode, imgData;
+			            realPath = file;//获取文件的真实本地路径.
+			            xmlHttp = new ActiveXObject("MSXML2.XMLHTTP");
+			            xmlHttp.open("POST",realPath, false);
+			            xmlHttp.send("");
+			            xml_dom = new ActiveXObject("MSXML2.DOMDocument");
+			            tmpNode = xml_dom.createElement("tmpNode");
+			            tmpNode.dataType = "bin.base64";
+			            tmpNode.nodeTypedValue = xmlHttp.responseBody;
+			            imgData = "data:image/"+ "jpg" +";base64," + tmpNode.text.replace(/\n/g,"");
+			            //计算文件大小
+			            // var str=imgData.substring(22);
+			            // var equalIndex= str.indexOf('=');
+			            // if(str.indexOf('=')>0){
+			            //     str=str.substring(0, equalIndex);
+			            // }
+			            // var strLength=str.length;
+			            // var fileLength=parseInt(strLength-(strLength/8)*2);
+			            // if(fileLength > 5120000){//图片大于5M
+			            //   alert("图片不能大于5M");
+			            //   // return;
+			            // }
+						 var img = document.getElementById('img');
+						//  // file_upl.blur();
+						 img.src = imgData
+						console.log(imgData)
+			            // callback(imgData);
+			            //return imgData;//渲染图片
+			        }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html, body{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				list-style: none;
+				padding: 20px 40px;
+				position: relative;
+				line-height: 1;
+			}
+			li::before{
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 100%;
+				width: 0;
+				height: 100%;
+				border-bottom:2px solid orange ;
+				transition: 0.2s all linear;
+			}
+			li:hover::before{
+				left: 0;
+				width: 100%;
+				/* animation: name 0.5s ; */
+				/* transition: 0.2s all linear; */
+			}
+			li:hover ~ li::before{
+				left: 0;
+			}
+			ul{
+				/* width: 500px; */
+				display: flex;
+			}
+			@keyframes name{
+				from{
+					width: 0;
+				}
+				to{
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>不可思议的css</li>
+			<li>导航栏</li>
+			<li>光标小下划线跟随</li>
+			<li>PURE CSS</li>
+			<li>Coco</li>
+		</ul>
+	</body>
+</html>
