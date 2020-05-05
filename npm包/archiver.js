@@ -1,4 +1,4 @@
-
+//archiver是一个在nodejs中能跨平台实现打包功能的模块，可以打zip和tar包，是一个比较好用的三方模块。
 const archiver = require('archiver');
 const fs = require('fs');
 const path = require('path');
@@ -7,26 +7,26 @@ const path = require('path');
 const output = fs.createWriteStream(__dirname + '/example.zip');
 
 //生成archiver对象，打包类型为zip
- let archive = archiver('zip', {
- 	zlib: {level: 9} //压缩等级
- })
+let archive = archiver('zip', {
+  zlib: { level: 9 } //压缩等级
+})
 
 
-output.on('close', function() {
-  
+output.on('close', function () {
+
   let size = archive.pointer() / 1000;
-  size = size > 1000 ? (size / 1000).toFixed(2) + 'MB' :  parseInt(size);
-  console.log('example.zip: '+ size)
-  
+  size = size > 1000 ? (size / 1000).toFixed(2) + 'MB' : parseInt(size);
+  console.log('example.zip: ' + size)
+
 });
 
-output.on('end', function() {
+output.on('end', function () {
   console.log('Data has been drained');
 });
 
- 
 
-archive.on('error', function(err) {
+
+archive.on('error', function (err) {
   throw err;
 });
 
