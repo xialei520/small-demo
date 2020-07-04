@@ -20,5 +20,39 @@
 <body>
     <img src="./images/logo.png" alt="">
 </body>
+<script>
+    // let success = (result) => {
+    //     console.log(result, '成功')
+    // }
+    // let fail = (err) => {
+    //     console.log(err, '失败')
+    // }
+    // navigator.geolocation.getCurrentPosition(success, fail, {
+    //     enableHighAccuracy: false,
+    //     timeout: 10000,
+    //     maximumAge: 10000
+    // })
+
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 50000,
+        maximumAge: 0
+    };
+
+    function success(pos) {
+        var crd = pos.coords;
+
+        console.log('Your current position is:');
+        console.log(`Latitude : ${crd.latitude}`);
+        console.log(`Longitude: ${crd.longitude}`);
+        console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
 
 </html>
