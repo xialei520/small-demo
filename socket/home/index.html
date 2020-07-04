@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="content">
+        <div>
+            <input type="text" v-model="text" />
+            <button id="send">发送</button>
+        </div>
+        <div>
+            <ul v-for="(item,index) in chatData" :key="index">
+                <li>{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#content",
+            data: {
+                chatData: [],
+                text: ""
+            }
+        })
+        const socket = io.connect("http://localhost");
+
+
+
+        document.getElementById('send').onclick = function () {
+
+            const socket = io.connect("http://localhost");
+            console.log(vm.text, '8888')
+            socket.emit("send", { text: vm.text });
+            socket.on("receive", data => {
+                console.log("我的年龄是：" + JSON.stringify(data));
+                vm.chatData.push(data.data);
+                socket.close();
+            });
+
+        }
+    </script>
+</body>
+
+
+</html>

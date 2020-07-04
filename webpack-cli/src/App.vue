@@ -14,10 +14,10 @@ export default {
     name: "App",
     methods: {
         jump(res) {
-            if (res === 1 || res === 2 || res === 3) {
+            if (res === 1 || res === 2) {
                 this.$router.push({ name: "gesture" });
             } else {
-                this.$router.push({ name: "gesture" });
+                this.$router.push({ name: "socket" });
             }
         }
     }
