@@ -48,7 +48,7 @@ module.exports = {
 
     // 单出口文件
     output: {
-        filename: 'build.[hash:8].js',//引入8位哈希值用于清缓存
+        filename: '[name].[hash:8].js',//引入8位哈希值用于清缓存
         //这个路径必须是绝对路径
         path: path.resolve('./build')
     },
