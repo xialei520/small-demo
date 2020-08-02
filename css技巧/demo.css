@@ -1,0 +1,42 @@
+.flex-container{
+    width: 300px;
+    height: 100px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+}
+.flex-container .item{
+    border: 1px solid green;
+    flex-basis: 50%;
+    text-align: center;
+}
+.border-style{
+    width: 500px;
+    height: 100px;
+}
+.border-style ul{
+    display: flex;
+}
+.border-style ul li{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+    
+}
+/* 给除了最后一个li标签加上右边框 */
+.border-style ul li:not(:last-child){ 
+    border-right: 1px solid green;
+}
+
+.test-line p{
+    border: 1px solid red;
+    line-height: 1.6;
+}
+.test-vertical{
+    border: 1px solid green;
+}
+.test-vertical img{
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+}
