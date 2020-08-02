@@ -28,11 +28,14 @@ const glob = require('glob');
 // copy文件夹到指定目录
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+//加载.vue文件配置plugins
+const VueLoaderPlugin = require("vue-loader/lib/plugin")
+
 // 单页index.html引入多个js
 //多页index.html index.js / b.html b.js
 module.exports = {
     //单入口文件
-    entry: './src/index.js', 
+    entry: './src/index.js',
 
     //多入口文件打包为一个js
     // entry: ['./src/index.js', './src/a.js'],
@@ -65,9 +68,19 @@ module.exports = {
         //服务器压缩
         compress: true,
         //自动打开浏览器
-        open:true,
+        open: true,
         //热更新，需要同时引入webpack
-        hot: true
+        hot: true,
+        stats: {
+            //添加构建模块信息
+            modules: false
+        }
+    },
+    resolve: {
+        extensions: [".js"],
+        alias: {
+            "@": path.resolve("src")
+        }
     },
     //模块配置
     module: {
@@ -76,18 +89,22 @@ module.exports = {
                 test: /\.css$/, use: cssExtract.extract({
                     fallback: 'style-loader',//加上后会以style的形式引入
                     use: [
-                        {loader: 'css-loader'}
+                        { loader: 'css-loader' }
                     ]
                 })
             },
             {
-                test: /\.less$/,  use: lessExtract.extract({
+                test: /\.less$/, use: lessExtract.extract({
                     fallback: 'style-loader',//加上后会以style的形式引入
                     use: [
-                        {loader: 'css-loader'}, 
-                        {loader: 'less-loader'}
+                        { loader: 'css-loader' },
+                        { loader: 'less-loader' }
                     ]
                 })
+            },
+            {
+                test: /\.vue$/,
+                loader: "vue-loader"
             }
         ]
     },
@@ -95,7 +112,7 @@ module.exports = {
     plugins: [
         lessExtract,
         cssExtract,
-        
+
         // 拷贝插件
         new CopyWebpackPlugin([
             {
@@ -153,11 +170,13 @@ module.exports = {
         //     hash: true
         // }),
 
+        //加载vue文件plugin
+        new VueLoaderPlugin()
     ],
     //可以更改模式
     mode: 'development',
     //配置解析
-    resolve:{}
+    resolve: {}
 
 
 }
