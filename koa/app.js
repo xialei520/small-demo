@@ -6,6 +6,7 @@ const app = new Koa();
 const static = require('koa-static');
 const Router = require("koa-router");
 const router = new Router();
+const proxy = require('koa-proxy');
 
 //加载静态资源
 app.use(static(
@@ -23,7 +24,12 @@ router.get('/', (ctx, next) => {
     ctx.body = "8889"
 })
 
-app.use(router.routes())
+app.
+    use(router.routes())
+// .use(proxy({
+//     host: "http://192.168.124.4",
+//     match: /^\/static\//
+// }))
 
 app.listen(port, host, () => {
     console.log(`server is running at http://${host}:${port}`)
