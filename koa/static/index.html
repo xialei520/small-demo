@@ -1,14 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <title>懒加载</title>
+    <meta name="referrer" content="no-referrer" />
+    <style media="screen">
+        body,
+        div,
+        ul,
+        li {
+            margin: 0;
+            padding: 0
+        }
+
+        div {
+            width: 80%;
+            height: auto;
+            /* border: 1px solid red; */
+            margin: 0 auto;
+        }
+
+        ul {
+            width: 100%;
+            height: 280px;
+            /* border: 1px solid blue; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li {
+            list-style: none;
+            /* float: left; */
+            width: 230px;
+            height: 230px;
+            /* border: 1px solid green; */
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            box-shadow: 0px 5px 13px 0px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.6s;
+        }
+
+        div img:hover {
+            transform: scale(1.4);
+
+            z-index: 100;
+        }
+
+        #return {
+            width: 50px;
+            height: 50px;
+            border: 1px solid blue;
+            border-radius: 10px;
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            background: red;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            display: none;
+
+        }
+
+        #return span:nth-child(1) {
+            position: absolute;
+            top: 4px;
+            left: 5px;
+        }
+
+        #return span:nth-child(2) {
+            position: absolute;
+            top: 4px;
+            right: 5px;
+        }
+
+        #return span:nth-child(3) {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        #return span:nth-child(4) {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+        }
+    </style>
 </head>
 
 <body>
-    home
+    <!-- <div class="one">123456789</div> -->
+    <div id="containter">
+        <!-- <ul>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+        <li><img src="" data-src=""/></li>
+      </ul> -->
+    </div>
+    <div id='return' onclick="backToTop()">
+        <span>返</span>
+        <span>回</span>
+        <span>顶</span>
+        <span>部</span>
+    </div>
+    <script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+        var Odiv = document.getElementById("containter");
+        var Oul = document.getElementsByTagName("ul");
+        var oImg = document.getElementsByTagName('img');
+        var Return = document.getElementById('return');
+
+        var seeHeight = document.documentElement.clientHeight;
+        $.ajax({
+            type: "GET",
+            url: "https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/50",
+            async: true,
+            success: function (s) {
+                var num = Math.floor(s.data.length / 4);
+                var html = "";
+                for (let i = 0; i < num; i++) {
+                    html += `<ul>
+              <li><img src="timg.gif" data-src="${s.data[i * 4].url}"/></li>
+              <li><img src="timg.gif" data-src="${s.data[i * 4 + 1].url}"/></li>
+              <li><img src="timg.gif" data-src="${s.data[i * 4 + 2].url}"/></li>
+              <li><img src="timg.gif" data-src="${s.data[i * 4 + 3].url}"/></li>
+            </ul>`
+                }
+                Odiv.innerHTML = html;
+                var Img = Array.from(oImg);
+                Img.forEach(function (value, index) {
+                    if (value.offsetTop < seeHeight) {
+
+                        value.src = value.dataset.src;
+                    }
+                })
+            }
+        })
+        $(window).scroll(function () {
+            var Img = Array.from(oImg);
+
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+            Img.forEach(function (value, index, arr) {
+
+                if (value.offsetTop < seeHeight + scrollTop - 100) {
+                    value.src = value.dataset.src;
+                }
+            })
+            if (scrollTop > seeHeight) {
+                Return.style.display = 'block';
+            } else {
+                Return.style.display = 'none';
+
+            }
+
+        })
+        function backToTop() {
+            $('html,body').animate({
+                scrollTop: 0
+            }, 800);
+        }
+
+    </script>
 </body>
 
 </html>
