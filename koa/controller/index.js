@@ -11,6 +11,7 @@ module.exports = {
         let postdata = ctx.request.body;
         ctx.body = postdata;
     },
+    //文件上传
     upload(ctx, next) {
         // 上传多个文件
 
@@ -20,7 +21,7 @@ module.exports = {
             // 创建可读流
             const reader = fs.createReadStream(file.path);
             // 获取上传文件扩展名
-            let filePath = path.resolve(`upload/${file.name}`);
+            let filePath = path.resolve(`upload/files/${file.name}`);
             // 创建可写流
             const upStream = fs.createWriteStream(filePath);
             // 可读流通过管道写入可写流
