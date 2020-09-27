@@ -11,6 +11,7 @@ module.exports = (router) => {
 
     //post请求
     router.post('/user', controller.user)
+    //文件上传
     router.post('/uploadfiles', controller.upload)
 
 }
