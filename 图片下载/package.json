@@ -1,0 +1,14 @@
+{
+    "name": "img",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "serve": "node app.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "request": "^2.88.2"
+    }
+}

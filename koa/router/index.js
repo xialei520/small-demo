@@ -8,6 +8,7 @@ module.exports = (router) => {
 
     //get请求
     router.get('/user/:id', controller.index)
+    router.get('/api', controller.songList)
 
     //post请求
     router.post('/user', controller.user)

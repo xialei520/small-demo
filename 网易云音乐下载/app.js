@@ -20,13 +20,12 @@ connection.connect((err) => {
 })
 async function insertDatabase(params) {
 
-    const sqlQuery = `INSERT INTO song_list (songName, size, birthtime, format) VALUES (${params.songName},${params.size},${params.birthtime},${params.format})`
+    const sqlQuery = `INSERT INTO song_list (songName, size, birthtime, format, url) VALUES ('${params.songName}','${params.size}','${params.birthtime}','${params.format}', '${params.url}')`
     await connection.query(sqlQuery, function (err, result) {
         if (err) {
             console.log(`SQL error: ${err}!`);
         } else {
             console.log("INSERT SUCCESS");
-            // closeMysql(connect);
         }
     });
 }
@@ -47,7 +46,10 @@ function readdir() {
             //创建时间的时间戳
             birthtime: Date.parse(new Date(stats.birthtime)),
             //格式
-            format: item.split('.')[1]
+            format: item.split('.')[1],
+
+            //图片路径
+            url: `http://api.xialei188.top/static/song/${item}`
         }
         insertDatabase(songList)
         console.log(songList)
