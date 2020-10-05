@@ -6,9 +6,21 @@ const { func } = require('assert-plus');
 
 function download(imgUrl) {
     console.log(`正在下载${imgUrl}`)
-    const filename = imgUrl.split('/').pop()
-    request.get(imgUrl)
-        .set({ 'Referer': 'https://gank.io/' }).pipe(fs.createWriteStream(path.join(__dirname, 'mm', filename)))
+    if (!fs.existsSync('mm')) {
+        fs.mkdirSync('mm')
+    }
+    const filename = imgUrl.split('/').pop();
+    request({
+        url: imgUrl,
+        method: "GET",
+        headers: {
+            'content-type': "application/json",
+        }
+    }, () => {
+
+    }).pipe(fs.createWriteStream(path.join(__dirname, 'mm', `${filename}.jpg`)))
+    // request.get()
+    //     .set({ 'Referer': 'https://gank.io/' })
 }
 
 const url = 'https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/50';
