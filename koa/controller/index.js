@@ -30,5 +30,9 @@ module.exports = {
         // ctx.redirect('/cart');
 
         ctx.body = "上传成功！";
+    },
+    songList(ctx, next) {
+        service.getSongList()
+
     }
 }

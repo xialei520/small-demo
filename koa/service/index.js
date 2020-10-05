@@ -38,5 +38,17 @@ module.exports = {
         //     });
         // }
 
+    },
+    //获取歌曲列表
+    getSongList() {
+        let sqlQuery = "select * from song_list";
+        connection.query(sqlQuery, function (err, result) {
+            if (err) {
+                console.log(`SQL error: ${err}!`);
+            } else {
+                console.log(result);
+                // closeMysql(connect);
+            }
+        });
     }
 }
