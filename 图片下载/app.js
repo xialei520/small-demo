@@ -4,11 +4,17 @@ const request = require('request');
 const { resolve } = require('path');
 const { func } = require('assert-plus');
 
+
+if (fs.existsSync('mm')) {
+    fs.rmdirSync('mm');
+} else {
+    fs.mkdirSync('mm');
+
+}
 function download(imgUrl) {
     console.log(`正在下载${imgUrl}`)
-    if (!fs.existsSync('mm')) {
-        fs.mkdirSync('mm')
-    }
+
+
     const filename = imgUrl.split('/').pop();
     request({
         url: imgUrl,

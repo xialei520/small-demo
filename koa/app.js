@@ -56,6 +56,10 @@ app.
     use(router.routes())
     .use(router.allowedMethods())
 
+app.on('error', err => {
+    console.log('server error:' + err)
+})
+
 app.listen(port, host, () => {
     console.log(`server is running at http://${host}:${port}`)
 })

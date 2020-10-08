@@ -34,5 +34,12 @@ module.exports = {
     songList(ctx, next) {
         service.getSongList()
 
+    },
+    //代理转发
+    proxy(ctx, next) {
+        ctx.status = 301;
+        ctx.set({
+            location: `http://localhost:8888/mm/${ctx.params.id}.jpg`
+        })
     }
 }
