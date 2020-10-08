@@ -1,15 +1,15 @@
 {
-    "name": "img",
+    "name": "file_server",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
     "scripts": {
-        "serve": "node app.js",
-        "insert": "node server.js"
+        "serve": "nodemon app.js"
     },
-    "author": "",
+    "author": "xialei",
     "license": "ISC",
     "dependencies": {
-        "request": "^2.88.2"
+        "koa": "^2.13.0",
+        "koa-static": "^5.0.0"
     }
 }
