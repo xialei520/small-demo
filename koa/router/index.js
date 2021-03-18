@@ -9,6 +9,8 @@ module.exports = (router) => {
     //get请求
     router.get('/user/:id', controller.index)
     router.get('/api', controller.songList)
+    router.get('/static/img', controller.imgList)
+
     // 0f536c69ada247429b8a9e38d3dba8bb
     router.get('/mm/:id', controller.proxy)
 

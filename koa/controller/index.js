@@ -32,8 +32,16 @@ module.exports = {
         ctx.body = "上传成功！";
     },
     songList(ctx, next) {
-        service.getSongList()
+        // await service.getSongList().then(result => {
+        //     ctx.body = result
+        // })
+        ctx.body = JSON.stringify(111)
 
+    },
+    imgList(ctx, next) {
+        service.getImgList().then(result => {
+
+        })
     },
     //代理转发
     proxy(ctx, next) {
