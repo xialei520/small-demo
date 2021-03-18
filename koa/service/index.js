@@ -50,5 +50,22 @@ module.exports = {
                 // closeMysql(connect);
             }
         });
+    },
+    getImgList() {
+        return new Promise((resolve, reject) => {
+            let sqlQuery = "select * from img_list";
+            connection.query(sqlQuery, function (err, result) {
+                if (err) {
+                    console.log(`SQL error: ${err}!`);
+                    reject(err)
+                } else {
+                    console.log(result);
+                    resolve(result)
+
+                }
+            });
+
+        })
+
     }
 }
