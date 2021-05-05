@@ -3,7 +3,7 @@
         <header>welcome to Vue !</header>
         <div class="layout">
             <div class="aside">
-                <p v-for="(item, index) in list" :key="index">{{item.title}}</p>
+                <p v-for="(item, index) in list" :key="index" @click="onClick(item)">{{item.title}}</p>
             </div>
              <router-view></router-view>
         </div>
@@ -17,17 +17,25 @@ export default {
             list: [
                 {
                     key: '01',
-                    title: 'demo1'
+                    title: 'demo1',
+                    router: '/demo1'
                 },
                  {
                     key: '02',
-                    title: 'demo2'
+                    title: 'demo2',
+                    router: '/demo2'
                 }
             ]
         }
     },
     components: {
         Aside
+    },
+    methods: {
+        onClick(item){
+            console.log(this)
+            this.$router.push(item.title)
+        }
     }
 }
 </script>
@@ -50,9 +58,12 @@ header{
             font-size: 16px;
             line-height: 32px;
             color: #fff
-            
+           
                
 
+        }
+        p:hover{
+            background: green;
         }
     }
 }

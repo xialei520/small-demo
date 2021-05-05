@@ -1,11 +1,9 @@
-let loaderUtils = require('loader-utils');
+const css = require('css');
 
 module.exports = (content) => {
-    // console.log(content)
-    let options = loaderUtils.getOptions(this);
-    console.log(options)
-
-
-    // console.log(options)
+   
+    // let cssAst = css.parse(content);
+    // console.log(cssAst)
+    // return css.stringify(cssAst);
     return content;
 }

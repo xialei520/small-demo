@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+console.log(path.resolve(__dirname))
 const px2vwLoader = path.resolve(__dirname, 'src/loaders/px2vw-loader.js');
 module.exports = {
     mode: 'development',
@@ -15,20 +16,20 @@ module.exports = {
         },
         extensions: ['.js', '.vue', '.json']
     },
+     //自定义loader
+     resolveLoader: {
+         //设置别名
+         alias: {
+             'px2vw-loader': px2vwLoader
+         }
+     },
     devtool: 'source-map',
     devServer: {
         host: '127.0.0.1',
         contentBase: path.resolve(__dirname, 'dist'),
         compress: true,
         port: 8888,
-        open: false
-        },
-        //自定义loader
-        resolveLoader: {
-                //设置别名
-                alias: {
-                    'px2vw-loader': px2vwLoader
-                },
+        open: true
     },
     module: {
         rules: [
@@ -41,10 +42,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader',
                     'less-loader',
                     {
-                        loader: 'px2vw-loader',
-                        options: {
-                            name: 'xialei'
-                        }
+                        loader: 'px2vw-loader'
                     }
                 ]
             }
