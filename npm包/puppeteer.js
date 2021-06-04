@@ -23,15 +23,54 @@ const puppeteer = require('puppeteer');
 // iframe.$$eval 相当于在 iframe 中运行 document.querySelectorAll 获取指定元素数组，并将其作为第一个参数传递
 
 (async () => {
-	const broswer = await (puppeteer.launch({executablePath: '', headless: false}));
+	const broswer = await (puppeteer.launch({
+	   headless: true,
+
+	}));
 	const page = await broswer.newPage();
 
-	await page.goto('https://music.163.com/'); 
+   const dimensions = await page.evaluate(() => { //执行js代码
+      return {
+         width: document.documentElement.clientWidth,
+         height: document.documentElement.clientHeight,
+      };
+   });
+   // 设置页面视窗大小
+   await page.setViewport(dimensions);
 
-	// 点击搜索框拟人输入 鬼才会想起
-   const musicName = '鬼才会想';
-   await page.type('#g_search', musicName, {delay: 0});
+   await page.goto('https://mogu.com/');
+   console.log(1)
+   await autoScroll(page);
 
-   // 回车
-   await page.keyboard.press('Enter');
+   console.log(3)
+
+
+
+   await page.screenshot({
+      path: 'screenshot.png',
+      fullPage: true
+   })
+
+   async function autoScroll(page) {
+         await page.evaluate(async () => {
+                     await new Promise((resolve) => {
+                              var totalHeight = 0;
+                              var distance = 100;
+                              // 每200毫秒让页面下滑100像素的距离
+                              var timer = setInterval(() => {
+                                       var scrollHeight = document.body.scrollHeight;
+                                       window.scrollBy(0, distance);
+                                       totalHeight += distance;
+                                       if (totalHeight >= scrollHeight) {
+                                          clearInterval(timer);
+                                          console.log(2)
+
+resolve();
+}
+}, 200);
+})
+});
+}
+console.log('brower is closed!')
+await broswer.close()
 })()
