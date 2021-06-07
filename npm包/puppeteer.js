@@ -23,11 +23,11 @@ const puppeteer = require('puppeteer');
 // iframe.$$eval 相当于在 iframe 中运行 document.querySelectorAll 获取指定元素数组，并将其作为第一个参数传递
 
 (async () => {
-	const broswer = await (puppeteer.launch({
-	   headless: true,
+   const broswer = await (puppeteer.launch({
+      headless: true,
 
-	}));
-	const page = await broswer.newPage();
+   }));
+   const page = await broswer.newPage();
 
    const dimensions = await page.evaluate(() => { //执行js代码
       return {
@@ -52,25 +52,25 @@ const puppeteer = require('puppeteer');
    })
 
    async function autoScroll(page) {
-         await page.evaluate(async () => {
-                     await new Promise((resolve) => {
-                              var totalHeight = 0;
-                              var distance = 100;
-                              // 每200毫秒让页面下滑100像素的距离
-                              var timer = setInterval(() => {
-                                       var scrollHeight = document.body.scrollHeight;
-                                       window.scrollBy(0, distance);
-                                       totalHeight += distance;
-                                       if (totalHeight >= scrollHeight) {
-                                          clearInterval(timer);
-                                          console.log(2)
+      await page.evaluate(async () => {
+         await new Promise((resolve) => {
+            var totalHeight = 0;
+            var distance = 100;
+            // 每200毫秒让页面下滑100像素的距离
+            var timer = setInterval(() => {
+               var scrollHeight = document.body.scrollHeight;
+               window.scrollBy(0, distance);
+               totalHeight += distance;
+               if (totalHeight >= scrollHeight) {
+                  clearInterval(timer);
+                  console.log(2)
 
-resolve();
-}
-}, 200);
-})
-});
-}
-console.log('brower is closed!')
-await broswer.close()
+                  resolve();
+               }
+            }, 200);
+         })
+      });
+   }
+   console.log('brower is closed!')
+   await broswer.close()
 })()
