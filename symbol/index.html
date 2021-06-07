@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let symbol1 = Symbol();
+            let symbol2 = Symbol("1");
+            let symbol3 = Symbol("2");
+
+            console.log(symbol2 == symbol1);
+
+            let symbol4 = Symbol.for("1");
+            let symbol5 = Symbol.for("1");
+
+            console.log(symbol4 == symbol5);
+
+            let symbol6 = Symbol.keyFor(symbol4);
+            console.log(symbol6);
+            console.log(typeof symbol4);
+
+            let obj = {
+                name: "xialei",
+                [symbol3]: "唯一性"
+            };
+            console.log({ ...obj, [symbol2]: "唯一性2" });
+
+            for (let i in obj) {
+                console.log(obj[i]);
+            }
+        </script>
+    </body>
+</html>
