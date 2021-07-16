@@ -1,0 +1,16 @@
+html,
+body,
+p,
+ul,
+li,
+span,
+ol,
+form {
+    padding: 0;
+    margin: 0;
+
+}
+
+div {
+    box-sizing: border-box;
+}
