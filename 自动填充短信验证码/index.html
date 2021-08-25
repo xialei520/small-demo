@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form>
+            <input type="text" inputmode="numeric" autocomplete="one-time-code" pattern="\d{6}" required />
+        </form>
+        <script>
+            if ("OTPCredential" in window) {
+                // DOMContentLoaded 事件会等待 DOM树准备好
+                window.addEventListener("DOMContentLoaded", (e) => {
+                    const input = document.querySelector('input[autocomplete="one-time-code"]');
+                    if (!input) return;
+                    const ac = new AbortController();
+                    // 用户可以自己输入验证码并且提交，使用 AbortController 终止 Web OTP API 的自动填充
+                    // AbortController 还可以终止 fetch 的请求
+                    // 监听终止事件 ac.signal.addEventListener('abort', function(){});
+                    const form = input.closest("form");
+                    if (form) {
+                        form.addEventListener("submit", (e) => {
+                            ac.abort(); // 终止 Web OTP API 的自动填充
+                        });
+                    }
+                    navigator.credentials
+                        .get({
+                            otp: { transport: ["sms"] },
+                            signal: ac.signal
+                        })
+                        .then((otp) => {
+                            input.value = otp.code;
+                            if (form) form.submit();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                });
+            }
+        </script>
+    </body>
+</html>
