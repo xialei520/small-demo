@@ -5,7 +5,7 @@ let port = 8000;
 const server = http.createServer()
 server.on('request', (req, res) => {
 	console.log(req.url, 123)
-	if(req.url === '/'){
+	if (req.url === '/') {
 		const compute = fork('./computed.js');
 		compute.send('开启一个新的子进程');
 		// 当一个子进程使用 process.send() 发送消息时会触发 'message' 事件
@@ -22,7 +22,7 @@ server.on('request', (req, res) => {
 		// console.info('计算结束', new Date());
 		// res.end(`sum is ${result}`)
 		// console.log(process.env.NODE_ENV)
-	}else{
+	} else {
 		res.end('ok')
 	}
 })
@@ -43,7 +43,7 @@ server.on('request', (req, res) => {
 // console.log(process.stdin)
 //进程名称
 process.title = '你电话'
-console.log( process.cwd())
+console.log(process.cwd())
 server.listen(port, '127.0.0.1', () => {
 	console.log(`server is running at http://127.0.0.1:${port}`)
 })

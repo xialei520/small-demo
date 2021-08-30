@@ -24,7 +24,7 @@ const puppeteer = require('puppeteer');
 
 (async () => {
    const broswer = await (puppeteer.launch({
-      headless: true,
+      headless: false,
 
    }));
    const page = await broswer.newPage();
