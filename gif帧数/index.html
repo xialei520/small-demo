@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="upload">
+    <script>
+        let inputBox = document.getElementById('upload');
+        inputBox.addEventListener("change", function () {
+            var reader = new FileReader();
+            console.log(inputBox.files)
+            reader.readAsDataURL(inputBox.files[0]);//发起异步请求
+            reader.onload = function () {
+                //读取完成后，数据保存在对象的result属性中
+                console.log(this.result)
+            }
+        })
+    </script>
+</body>
+
+</html>
