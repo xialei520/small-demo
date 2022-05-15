@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- 方法一 -->
+    <div id="dynamic-background" style="width: 100%; height: 100%; position: fixed;z-index: -1;">
+        <script>
+            window.addEventListener("load", function (e) {
+                document.getElementById("dynamic-background").innerHTML = '<iframe src="https://tuapi.eees.cc/acgPicPPTShow/" width="100%" height="100%" style="border: 0;"></iframe>';
+            });
+        </script>
+
+
+    </div>
+    <!-- 方法二 -->
+    <script>
+        window.addEventListener("load", function (e) {
+            var obj = document.createElement("div");
+            obj.style = "width:100%; height:100%; position:fixed; z-index:-1;";
+            obj.innerHTML = '<iframe src="https://tuapi.eees.cc/acgPicPPTShow/" width="100%" height="100%" style="border: 0;"></iframe>';
+            var first = document.body.firstChild; // 得到页面的第一个元素
+            document.body.insertBefore(obj, first); // 在得到的第一个元素之前插入
+        });
+
+    </script>
+</body>
+
+
+</html>

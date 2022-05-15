@@ -9,7 +9,8 @@ const output = fs.createWriteStream(__dirname + '/example.zip');
 //生成archiver对象，打包类型为zip
 let archive = archiver('zip', {
   zlib: { level: 9 }, //压缩等级
-  comment: '123456789'
+  comment: '123456789',
+  forceZip64: true
 })
 
 
