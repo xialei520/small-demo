@@ -7,18 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+    <div>我是postmessage.html</div>
     <iframe src="http://localhost/iframe.html" frameborder="0" name="sendMessage"></iframe>
     <script>
         window.onload = function(){
-
+            
             let ifr = window.frames['sendMessage'];
-           
+            console.log(ifr, 'ifr')
             ifr.postMessage('give you a message', 'http://localhost');
-
+            console.log('发送信息成功')
             window.addEventListener('message', receiver, false);
 
             function receiver(e){
-                console.log(e, '-----------------')
+                console.log(e.data, '---------我是子页面的信息--------')
                 
             }
         }

@@ -1,57 +1,32 @@
-<<<<<<< HEAD
-<!--
- * @Author: xialei
- * @Date: 2021-04-13 19:46:19
- * @LastEditors: xialei
- * @LastEditTime: 2022-04-17 00:20:37
- * @FilePath: \small-demo\video\index.html
- * @Description: 
- * 
- * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
--->
 <!DOCTYPE html>
 <html lang="en">
-
-=======
-<!DOCTYPE html>
-<html lang="en">
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-<<<<<<< HEAD
-        video {
-=======
         video{
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
             width: 100%;
             height: 100vh;
         }
     </style>
 </head>
-<<<<<<< HEAD
+ 
 
-<body>
-    <video id="myVideo" preload controls loop muted poster="./poster.jpg">
-        <!-- <source src="https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_home_web/medias/1-4.6d59e328.mp4"  type="video/mp4"/> -->
-        <source src="http://26.26.26.1/cc.mp4" type="video/mp4">
-=======
+ 
 <body>
     <video id="myVideo" preload controls loop muted poster="./poster.jpg" >
         <source src="https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_home_web/medias/1-4.6d59e328.mp4"  type="video/mp4"/>
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
+ 
     </video>
     <script>
         let myVideo = document.querySelector('#myVideo');
         setTimeout(() => {
-<<<<<<< HEAD
-            console.log(myVideo.currentSrc);
-=======
+ 
         console.log(myVideo.currentSrc);
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
+ 
 
         }, 1000)
         //设置音量为50%
@@ -63,30 +38,24 @@
             console.log(e)
         })
 
-<<<<<<< HEAD
-        // 2、durationchange：时长变化。当指定的音频/视频的时长数据发生变化时触发，加载后，时长由 NaN 变为音频/视频的实际时长
-        myVideo.addEventListener('durationchange', function (e) {
-=======
+ 
          // 2、durationchange：时长变化。当指定的音频/视频的时长数据发生变化时触发，加载后，时长由 NaN 变为音频/视频的实际时长
         myVideo.addEventListener('durationchange', function(e) {
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
+ 
             console.log('提示视频的时长已改变')
             console.log(e)
             console.log(myVideo.duration)           //4.08    视频的实际时长（单位：秒）
         })
 
-<<<<<<< HEAD
-        // 3、loadedmetadata ：元数据加载。当指定的音频/视频的元数据已加载时触发，元数据包括：时长、尺寸（仅视频）以及文本轨道
-        myVideo.addEventListener('loadedmetadata', function (e) {
-=======
+ 
          // 3、loadedmetadata ：元数据加载。当指定的音频/视频的元数据已加载时触发，元数据包括：时长、尺寸（仅视频）以及文本轨道
          myVideo.addEventListener('loadedmetadata', function(e) {
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
+ 
             console.log('提示视频的元数据已加载')
             console.log(e)
         })
 
-<<<<<<< HEAD
+ 
         // 8、play：播放监听
         myVideo.addEventListener('play', function (e) {
             console.log('提示该视频正在播放中')
@@ -100,20 +69,3 @@
         })
     </script>
 </body>
-
-=======
-         // 8、play：播放监听
-         myVideo.addEventListener('play', function(e) {
-            console.log('提示该视频正在播放中')
-            console.log(e)
-            })
-
-        // 9、pause：暂停监听
-        myVideo.addEventListener('pause', function(e) {
-            console.log('暂停播放')
-            console.log(e)
-            })
-    </script>
-</body>
->>>>>>> a356f6281b64bfd772e3ac22365d52cc9a5e7648
-</html>

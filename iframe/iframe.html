@@ -7,15 +7,16 @@
     <title>Document</title>
 </head>
 <body>
+    <div>我是iframe.html</div>
     <script>
         window.addEventListener('message', receiver, false);
 
         function receiver(e){
-            
-            if(e.origin == 'http://localhost'){
-                
-                e.source.postMessage('received', e.origin);  //向原网页返回信息
-            }
+            console.log(e, '收到')
+            // if(e.origin == 'http://localhost'){
+                console.log('收到父页面信息')
+                e.source.postMessage('我是子页面的信息', e.origin);  //向原网页返回信息
+            // }
         }
     </script>
 </body>

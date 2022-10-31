@@ -1,0 +1,4 @@
+#btn {
+    transition-property: background-color, font-size;
+    transition-duration: 5s;
+}
