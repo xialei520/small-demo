@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html,
+        p,
+        ul,
+        li,
+        span {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            border: 1px solid red;
+        }
+
+        button {}
+
+        .bottom-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: all .2s;
+
+        }
+
+        .action-panel {
+            padding: 24px;
+            display: flex;
+            justify-content: flex-end;
+            border: 1px solid green;
+        }
+
+        .icon-chenggong {
+            font-size: 30px !important;
+        }
+    </style>
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+</head>
+
+<body>
+    <div>
+        <button id="btn">弹出键盘</button>
+        <div class="mask">
+
+            <div class="bottom-section">
+                <input id="input" type="text"><br />
+                <p class="action-panel" id="panel">
+                    <i class="iconfont icon-chenggong"></i>
+
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        let $ = (param) => (document.getElementById(param) || document.querySelector(param));
+        $('input').onblur = function () {
+            // alert('blur')
+            // $('panel').style.paddingBottom = '295px'
+        }
+        $('input').onfocus = function () {
+            // alert('focus')
+            // $('panel').style.paddingBottom = '0'
+            $('bottom-section').style.top = 0;
+            $('bottom-section').style.top = $('bottom-section') + 'px';
+
+            const winheight = document.documentElement.clientHeight || document.body.clientHeight;
+            // alert(winheight)
+        }
+        $('btn').onclick = function () {
+            $('input').focus()
+        }
+    </script>
+</body>
+
+</html>

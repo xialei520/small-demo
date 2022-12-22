@@ -1,0 +1,37 @@
+{
+  "id": "3221297",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11372648",
+      "name": "成功",
+      "font_class": "chenggong",
+      "unicode": "e8ad",
+      "unicode_decimal": 59565
+    },
+    {
+      "icon_id": "11372757",
+      "name": "成功",
+      "font_class": "chenggong1",
+      "unicode": "e8c3",
+      "unicode_decimal": 59587
+    },
+    {
+      "icon_id": "19490725",
+      "name": "售后",
+      "font_class": "shouhou",
+      "unicode": "f132",
+      "unicode_decimal": 61746
+    },
+    {
+      "icon_id": "27890937",
+      "name": "活动",
+      "font_class": "huodong",
+      "unicode": "100bb",
+      "unicode_decimal": 65723
+    }
+  ]
+}
