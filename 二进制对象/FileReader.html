@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="fileInput">
+    <div id="content"></div>
+    <script>
+        let fileIput = document.querySelector('#fileInput');
+        let content = document.querySelector('#content');
+
+        let reader = new FileReader();
+
+        fileIput.onchange = function (e) {
+            // reader.readAsText(e.target.files[0]);
+            reader.readAsDataURL(e.target.files[0])
+        }
+        console.log(reader, 'cccc')
+        reader.onprogress = function (e) {
+            console.log('progress', e)
+            //loaded 已读取量
+            //total 需读取总量
+            if (e.loaded && e.total) {
+                const percent = (event.loaded / event.total) * 100;
+                console.log(`上传进度: ${Math.round(percent)} %`);
+            }
+        }
+        reader.onload = function (e) {
+
+            content.innerHTML = e.target.result;
+            let img = new Image();
+            img.width = '200';
+            img.height = '200';
+            img.src = e.target.result;
+
+            document.body.appendChild(img)
+        }
+    </script>
+</body>
+
+</html>

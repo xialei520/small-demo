@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域脚本异常捕获</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+        //访问跨域的脚本，脚本发生错误时，主页面只能收集到"Script error."的错误信息
+        //解决方法： 给script标签设置crossOrigin=anymous， 表示允许获取跨域脚本的错误信息；同时服务端需要设置cors
+        window.onerror = function (message, url, line, col, error) {
+
+            console.log([message, url, line, col, error].join('\n'))
+        }
+        let script = document.createElement('script');
+        script.src = "http://192.168.175.1:9999/error.js";
+
+        // script.crossOrigin = 'anymous'
+        document.body.appendChild(script)
+    </script>
+
+    <!--<script src="http://192.168.175.1:9999/error.js"></script>-->
+</body>
+
+</html>

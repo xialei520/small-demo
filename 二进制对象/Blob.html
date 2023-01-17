@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe id="app"></iframe>
+    <script>
+        //创建Blob
+        let b = new Blob(['the road of learn blob'], { type: 'text/plain' })
+        console.log('b', b);
+        //切片
+        b = b.slice(4, 8);
+        //转换成URL
+        let url = URL.createObjectURL(b);
+        console.log(url)
+        document.querySelector('#app').src = url;
+        //释放内存
+        URL.revokeObjectURL(url)
+    </script>
+</body>
+
+</html>

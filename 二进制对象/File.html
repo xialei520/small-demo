@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #drop-zone {
+            height: 150px;
+            border: 1px solid red
+        }
+    </style>
+</head>
+
+<body>
+    <!--multiple 是否支持多选-->
+    <!--accept 可选择的文件类型-->
+    <input type="file" multiple accept="image/*" id="input">
+
+    <div id="drop-zone"></div>
+    <script>
+        //input
+        let selectInput = document.querySelector('#input');
+        selectInput.onchange = function (e) {
+            console.log('e///', e.target.files)
+            let img = new Image();
+            img.width = '200';
+            img.height = '200';
+            img.src = URL.createObjectURL(e.target.files[0]);
+            console.log(img.src)
+            document.body.appendChild(img)
+        }
+
+        //拖放
+        let dropZone = document.querySelector('#drop-zone');
+        dropZone.ondragover = function (e) {
+            console.log('dragover')
+            e.preventDefault();
+
+        }
+
+        dropZone.ondrop = function (e) {
+            e.preventDefault();
+            console.log('drop', e.dataTransfer.files)
+            let img = new Image();
+            img.width = '200';
+            img.height = '200';
+            img.src = URL.createObjectURL(e.dataTransfer.files[0]);
+            console.log(img.src)
+            document.body.appendChild(img)
+        }
+
+    </script>
+</body>
+
+</html>
