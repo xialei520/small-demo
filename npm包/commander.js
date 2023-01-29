@@ -1,54 +1,44 @@
-const program = require('commander');
+const {program, Option} = require('commander');
 
-function range(val) {
-  return val.split('..').map(Number);
-}
+// --help 显示选项帮助
 
-function list(val) {
-  return val.split(',');
-}
+program.version('1.2.2', '-v, --vers', 'output the current version') //--version 或-V   1.2.2
 
-function collect(val, memo) {
-  memo.push(val);
-  return memo;
-}
+//option定义选项 ，同时可以附加选项的简介
+//每个选项可以定义一个短选项名称（-后面接单个字符）和一个长选项名称（--后面接一个或多个单词），使用逗号、空格或|分隔
+program.option("-j, --join", "welcome to join us!");
+// 一类是 boolean 型选项，选项无需配置参数；
+//另一类选项则可以设置参数（使用尖括号声明在该选项后，如--expect <value> 
+//<xxx>表示必传参数
+//[xxxx]表示可选参数
+program.option("-p, --pizza-type <type>", "flavour of pizza"); //{ join: true, pizzaType: '222' }
+//设置默认值,第三个参数可以设置默认值
+program.option("-c, --cheese <type>", "welcome to join us!", 'ok!');
+program.option('--no-sauce', 'remove sauce') //{sauce: true}
+program.option('-r, --rice [ddd]', 'remove sauce')  //不加-r-->undefined；-r--> rice:true；-r 123 --> rice:123
+//变长参数选项
+program.option('-n, --number <numbers...>', 'specify numbers') //-n 1 2 3 ---> number: [1, 2,3]
+program.option('-l, --letter [letters...]', 'specify letters') //-l90 333 ---> letter: [90]
 
-function increaseVerbosity(v, total) {
-  return total + 1;
-}
-
+//其他选项配置
 program
-  .version('0.1.0')
-  .usage('[options] <file ...>')
-  .option('-i, --integer <n>', 'An integer argument', parseInt)
-  .option('-f, --float <n>', 'A float argument', parseFloat)
-  .option('-r, --range <a>..<b>', 'A range', range)
-  .option('-l, --list <items>', 'A list', list)
-  .option('-o, --optional [value]', 'An optional value')
-  .option('-c, --collect [value]', 'A repeatable value', collect, [])
-  .option('-v, --verbose', 'A value that can be increased', increaseVerbosity, 0)
-  .option('-p, --param [value]')
-  .parse(process.argv);
+.addOption(new Option('-d, --drink <size>').choices(['small', 'medium', 'large'])) //输入指定的参数值
+.addOption(new Option('-t, --timeout <delay>', 'timeout in seconds').default(60, 'one minite'))
+//自定义选项处理
+//该函数接收两个参数，即用户新输入的参数值和当前已有的参数值（即上一次调用自定义处理函数后的返回值），返回新的选项参数值
+function myParseInt(value, previous){
+   
+  return parseInt(value, 10);
+}
+program.option('-i, --integer <number>', 'integer argument', myParseInt) //-l90 333 ---> letter: [90]
 
-console.log(' int: %j', program.integer);
-console.log(' float: %j', program.float);
-console.log(' optional: %j', program.optional);
-program.range = program.range || [];
-console.log(' range: %j..%j', program.range[0], program.range[1]);
-console.log(' list: %j', program.list);
-console.log(' collect: %j', program.collect);
-console.log(' verbosity: %j', program.verbose);
-console.log(' args: %j', program.args);
-console.log(' param: %j', program.param)
+//解析选项
+program.parse(process.argv)
+//获取选项对象
+let options = program.opts()
+console.log("options", options )
+console.log('remaining arguments', program.args)
+console.log()
 
-// 执行结果
-//node commander.js -i 1.2 -f 1.2 -r 1..2 -l a,b -o hehe -c heihei -v zeze
-
-//  int: 1
-//  float: 1.2
-//  optional: "hehe"
-//  range: 1..2
-//  list: ["a","b"]
-//  collect: ["heihei"]
-//  verbosity: 1
-//  args: ["zeze"]
+//获取选项值
+// console.log(program.getOptionValue('join'))

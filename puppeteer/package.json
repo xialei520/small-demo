@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "puppeteer": "^2.0.0"
-  }
+    "scripts": {
+        "start": "node ./autoTest.js -p"
+    },
+    "dependencies": {
+        "commander": "^10.0.0",
+        "puppeteer": "^2.0.0",
+        "readline": "^1.3.0"
+    }
 }

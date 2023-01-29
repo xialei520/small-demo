@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>ddd</div>
+    <script>
+
+        async function request() {
+
+            let url = "http://192.168.175.1:1111/getUser.json"
+            let response = await fetch(url, {
+                // method: "POST",
+                headers: {},
+                body: JSON.stringify()
+            });
+            console.log('response///', response)
+            if (response.ok) {
+                let json = await response.json();
+                console.log('json///', json)
+            } else {
+                console.error('request error!!!')
+            }
+        }
+
+        request()
+    </script>
+</body>
+
+</html>
