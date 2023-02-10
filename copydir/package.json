@@ -1,0 +1,24 @@
+{
+    "name": "copydir",
+    "version": "1.0.4",
+    "description": "copy directry",
+    "main": "index.js",
+    "type": "module",
+    "files": [
+        "bin/index.js",
+        "package.json",
+        "README.md"
+    ],
+    "bin": {
+        "copydir": "bin/index.js"
+    },
+    "scripts": {
+        "execute": "node bin/index.js -p"
+    },
+    "keywords": [
+        "copy",
+        "directry"
+    ],
+    "author": "xialei",
+    "license": "MIT"
+}
