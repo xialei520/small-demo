@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="input">
+    <script>
+        let input = document.getElementById('input');
+        input.onchange = function (e) {
+            let file = e.target.files[0];
+
+
+            let chunks = createChunks(file, 10 * 1024 * 1024)
+            console.log('chunks', chunks)
+            for (let i = 0; i < chunks.length; i++) {
+                let chunk = chunks[i];
+                request(chunk)
+                console.log('chunk', chunk)
+            }
+
+        }
+        function request(file) {
+            let formdata = new FormData();
+            formdata.append('file', file);
+            fetch("http://localhost:3000", { mode: "no-cors", body: formdata })
+                .then(rsp => {
+                    console.log(rsp);
+                    return rsp.text()
+                }).then(response => {
+                    console.log(response, 'response');
+                });
+        }
+        function createChunks(file, chunkSize) {
+            const result = [];
+            for (let i = 0; i < file.size; i += chunkSize) {
+                result.push(file.slice(i, i + chunkSize));
+            }
+            return result;
+        }
+    </script>
+</body>
+
+</html>

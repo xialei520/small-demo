@@ -1,0 +1,21 @@
+{
+    "name": "mycli",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "bin": {
+        "mycli": "./index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "commander": "^10.0.0",
+        "git-clone": "^0.2.0",
+        "open": "^8.4.2",
+        "shelljs": "^0.8.5"
+    }
+}

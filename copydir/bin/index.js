@@ -15,7 +15,7 @@ if (process.argv.length < 4) {
     console.log("参数有误，请重新输入！", process.argv);
     process.exit(0);
 }
-
+// TODO: 判断dest是否与当前项目name关联
 let src = process.argv[2];
 let dest = path.resolve(process.argv[3], `./v${version}`);
 
