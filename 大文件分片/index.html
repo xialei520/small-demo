@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id="file">
+    <script src="./spark-md5.js"></script>
+    <script type="module">
+        import { cutFile } from './cutFile.js';
+        let inpFile = document.getElementById("file");
+        inpFile.onchange = async function (e) {
+
+            let file = e.target.files[0];
+            console.time('cutFile')
+            let chunks = await cutFile(file);
+            console.timeEnd('cutFile');
+            console.log(chunks);
+        }
+    </script>
+</body>
+
+</html>
