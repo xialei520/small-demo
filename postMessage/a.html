@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="text" id="ipt" />
+        <button id="btn">点击操作页面</button>
+        <script>
+            btn.onclick = function () {
+                const w2 = window.open("http://192.168.6.90:8888/b.html");
+
+                w2.onload = function () {
+                    w2.postMessage("页面一 发送====> 页面二", "http://192.168.6.90:8888");
+                };
+            };
+
+            window.addEventListener("message", function (e) {
+                console.log(e.data);
+                ipt.value = e.data;
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+         
+        <h2 id="h2">标题二</h2>
+        <button id="btn">点击</button>
+
+        <script>
+            const parentWindow =
+                window.opener; /* 如果是从 http://192.168.6.90:8888 中的某个页面将B页面打开，那么就能成功发送跨文档信息
+     如果讲此处的URI换成"*"，就意味着任何网页打开B页面，都能收到B页面传输的信息
+     */
+            btn.onclick = function () {
+                parentWindow.postMessage(h2.innerHTML, "http://192.168.6.90:8888");
+            };
+            window.addEventListener("message", function (e) {
+                console.log(e.data);
+            });
+        </script>
+    </body>
+</html>
