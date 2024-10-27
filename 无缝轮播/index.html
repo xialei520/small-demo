@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .container {
+                margin: auto;
+                border: 2px solid #000;
+                width: 300px;
+                height: 200px;
+                position: relative;
+            }
+            .list {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                display: flex;
+            }
+            .item {
+                flex: none;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 200px;
+                font-size: 30px;
+            }
+            .item-1 {
+                background-color: red;
+            }
+            .item-2 {
+                background-color: orange;
+            }
+            .item-3 {
+                background-color: green;
+            }
+            .left {
+                position: absolute;
+                left: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 30px;
+                color: #fff;
+                width: 30px;
+                height: 30px;
+            }
+            .right {
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 30px;
+                color: #fff;
+                width: 30px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="list">
+                <div class="item item-1">1</div>
+                <div class="item item-2">2</div>
+                <div class="item item-3">3</div>
+            </div>
+            <div class="left" onclick="goLeft()"><</div>
+            <div class="right" onclick="goRight()">></div>
+        </div>
+        <script>
+            const domList = document.querySelector(".list");
+            const childLength = document.querySelectorAll(".list .item").length;
+
+            let curIndex = 0;
+            function moveTo(index) {
+                domList.style.transform = `translateX(-${index * 100}%)`;
+                domList.style.transition = `transform .5s`;
+            }
+
+            function goLeft() {
+                if (curIndex < childLength - 1) {
+                    moveTo(++curIndex);
+                }
+            }
+            function goRight(params) {
+                if (curIndex > 0) {
+                    moveTo(--curIndex);
+                }
+            }
+        </script>
+    </body>
+</html>

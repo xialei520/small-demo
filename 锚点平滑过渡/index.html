@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html,
+            body {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                scroll-behavior: smooth;
+            }
+            header {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 50px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #000;
+            }
+            header a {
+                padding: 0 20px;
+                color: #fff;
+            }
+            .content {
+                /* padding-top: 50px; */
+                box-sizing: border-box;
+            }
+            .content .item {
+                width: 100%;
+                height: 100vh;
+                font-size: 40px;
+                background-color: aquamarine;
+                color: #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="#A">A</a>
+            <a href="#B">B</a>
+            <a href="#C">C</a>
+            <a href="#D">D</a>
+        </header>
+        <div class="content">
+            <div class="item" id="A">A</div>
+            <div class="item" id="B">B</div>
+            <div class="item" id="C">C</div>
+            <div class="item" id="D">D</div>
+        </div>
+    </body>
+</html>

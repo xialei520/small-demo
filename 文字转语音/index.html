@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button onclick="startAudio()">点击转化成语音</button>
+        <script>
+            let str =
+                "在使用电脑的过程中，有时我们会发现电脑右下角的图标（通常被称为系统托盘图标）不见了，这可能会给我们带来诸多不便";
+            let msg = new SpeechSynthesisUtterance(str);
+            function startAudio() {
+                msg.volume = 2; // 音量
+                msg.rate = 0.8; // 语速
+                window.speechSynthesis.speak(msg);
+            }
+        </script>
+    </body>
+</html>
