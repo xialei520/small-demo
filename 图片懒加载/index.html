@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>懒加载</title>
-    <style>
-        html,body{
-            margin: 0;
-            padding: 0;
-        }
-        img{
-            width:100%;
-            min-height: 300px;
-            border: 1px solid red;
-        }
-        .container{
-            padding: 100px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(12, 1fr);
-            gap: 40px;
-            justify-content: space-between;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img data-src="./images/1.jpg" alt="加载失败">
-         <img data-src="./images/2.jpg" alt="加载失败">
-          <img data-src="./images/3.jpg" alt="加载失败">
-           <img data-src="./images/4.jpg" alt="加载失败">
-            <img data-src="./images/5.jpg" alt="加载失败">
-             <img data-src="./images/6.jpg" alt="加载失败">
-              <img data-src="./images/7.jpg" alt="加载失败">
-               <img data-src="./images/8.jpg" alt="加载失败">
-                <img data-src="./images/9.jpg" alt="加载失败">
-                 <img data-src="./images/1.jpg" alt="加载失败">
-                  <img data-src="./images/2.jpg" alt="加载失败">
-                   <img data-src="./images/3.jpg" alt="加载失败">
-                    <img data-src="./images/4.jpg" alt="加载失败">
-                     <img data-src="./images/5.jpg" alt="加载失败">
-                        <img data-src="./images/6.jpg" alt="加载失败">
-                        <img data-src="./images/7.jpg" alt="加载失败">
-                        <img data-src="./images/8.jpg" alt="加载失败">
-                            <img data-src="./images/9.jpg" alt="加载失败">
-    </div>
-    <script>
-        const images = document.querySelectorAll('img[data-src]')
-      
-        const observer = new IntersectionObserver(entries => {
-            console.log('日志输出', entries);
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.src = entry.target.dataset.src;
-                    observer.unobserve(entry.target)
-                }
-            })
-        })
-        images.forEach(img => observer.observe(img))
-        
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>懒加载</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            img {
+                width: 100%;
+                min-height: 300px;
+                border: 1px solid red;
+            }
+            .container {
+                padding: 100px;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(12, 1fr);
+                gap: 40px;
+                justify-content: space-between;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img data-src="./images/1.jpg" alt="加载失败" />
+            <img data-src="./images/2.jpg" alt="加载失败" />
+            <img data-src="./images/3.jpg" alt="加载失败" />
+            <img data-src="./images/4.jpg" alt="加载失败" />
+            <img data-src="./images/5.jpg" alt="加载失败" />
+            <img data-src="./images/6.jpg" alt="加载失败" />
+            <img data-src="./images/7.jpg" alt="加载失败" />
+            <img data-src="./images/8.jpg" alt="加载失败" />
+            <img data-src="./images/9.jpg" alt="加载失败" />
+            <img data-src="./images/1.jpg" alt="加载失败" />
+            <img data-src="./images/2.jpg" alt="加载失败" />
+            <img data-src="./images/3.jpg" alt="加载失败" />
+            <img data-src="./images/4.jpg" alt="加载失败" />
+            <img data-src="./images/5.jpg" alt="加载失败" />
+            <img data-src="./images/6.jpg" alt="加载失败" />
+            <img data-src="./images/7.jpg" alt="加载失败" />
+            <img data-src="./images/8.jpg" alt="加载失败" />
+            <img data-src="./images/9.jpg" alt="加载失败" />
+        </div>
+        <script>
+            const images = document.querySelectorAll("img[data-src]");
+
+            const observer = new IntersectionObserver((entries) => {
+                console.log("日志输出", entries);
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.src = entry.target.dataset.src;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            images.forEach((img) => observer.observe(img));
+        </script>
+    </body>
 </html>

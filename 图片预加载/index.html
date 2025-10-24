@@ -1,37 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        autoPreloadImages()
-        function autoPreloadImages(){
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const urls = [
+                "images/1.png",
+                "images/2.png",
+                "images/3.png",
+                "images/4.png",
+                "images/5.png",
+                "images/6.png",
+                "images/7.png",
+                "images/8.png",
+                "images/9.png",
+                "images/10.png",
+                "images/11.png",
+                "images/12.png"
+            ];
 
-            // const files = require.context('./images')
-            const urls = ['images/1.png', 'images/2.png', 'images/3.png', 'images/4.png', 'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png', 'images/9.png', 'images/10.png', 'images/11.png', 'images/12.png']
-            if('requestIdleCallback' in window){
-                
-                requestIdleCallback(()=> {
-                    preloadImages(urls)
-                })
-            }else{
-                
-                window.addEventListener('load', event => {
-                    preloadImages(urls)
-                }, {
-                    once: true
-                })
+            autoPreloadImages();
+            function autoPreloadImages() {
+                // const files = require.context('./images')
+
+                if ("requestIdleCallback" in window) {
+                    requestIdleCallback(() => {
+                        preloadImages(urls);
+                    });
+                } else {
+                    window.addEventListener(
+                        "load",
+                        (event) => {
+                            preloadImages(urls);
+                        },
+                        {
+                            once: true
+                        }
+                    );
+                }
             }
-        }
-        function preloadImages(urls){
-            urls.forEach(url => {
-                const img = new Image();
-                img.src=url;
-            })
-        }
-    </script>
-</body>
+            // function preloadImages(urls) {
+            //     urls.forEach((url) => {
+            //         const img = new Image();
+            //         img.src = url;
+            //     });
+            // }
+
+            function preloadImages() {
+                const images = [...urls];
+                function loadImage() {
+                    const src = images.shift();
+                    return new Promise((resolve, reject) => {
+                        const link = document.createElement("link");
+                        link.rel = "preload";
+                        link.as = "image";
+                        link.href = src;
+                        document.head.appendChild(link);
+                        link.onload = resolve;
+                        link.onerror = reject;
+                        setTimeout(reject, 10000);
+                    });
+                }
+                function _loadImage() {
+                    loadImage().finally(() => {
+                        if (images.length) {
+                            console.log("fianlly");
+
+                            _loadImage();
+                        }
+                    });
+                }
+                for (let i = 0; i < 3; i++) {
+                    _loadImage();
+                }
+            }
+        </script>
+    </body>
 </html>
