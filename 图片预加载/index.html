@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        autoPreloadImages()
+        function autoPreloadImages(){
+
+            // const files = require.context('./images')
+            const urls = ['images/1.png', 'images/2.png', 'images/3.png', 'images/4.png', 'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png', 'images/9.png', 'images/10.png', 'images/11.png', 'images/12.png']
+            if('requestIdleCallback' in window){
+                
+                requestIdleCallback(()=> {
+                    preloadImages(urls)
+                })
+            }else{
+                
+                window.addEventListener('load', event => {
+                    preloadImages(urls)
+                }, {
+                    once: true
+                })
+            }
+        }
+        function preloadImages(urls){
+            urls.forEach(url => {
+                const img = new Image();
+                img.src=url;
+            })
+        }
+    </script>
+</body>
+</html>
